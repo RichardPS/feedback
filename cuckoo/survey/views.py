@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 import pdb
 
+from .forms import SupportOptionsForm
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
 from .models import SupportSurvey
@@ -26,9 +27,17 @@ def create_support_survey(request):
             survey.time = regarding[3]
             survey.checked_by = regarding[4]
             survey.set_up_by = regarding[5]
-            # pdb.set_trace()
+            
             survey.save()
+
             messages.success(request, "Success")
+            messages.info(request, "{0}/support-survey/{1}".format(
+                request.META['HTTP_HOST'],
+                survey.pk)
+            )
+
+            # pdb.set_trace()
+
             return redirect('/create-support-survey/')
         else:
             messages.error(request, "Invalid Data")
@@ -48,14 +57,15 @@ def complete_support_survey(request, pk):
     if request.method == 'POST':
         support_survey = SupportSurvey.objects.get(pk=pk)
         support_feedback_form = SupportQuestionsForm(request.POST)
+        support_options_form = SupportOptionsForm(request.POST)
         if support_feedback_form.is_valid():
+            pdb.set_trace()
             questions = support_feedback_form.save(commit=False)
             questions.support_survey = support_survey
             questions.quality = request.POST.get("quality")
             questions.speed = request.POST.get("speed")
             questions.service = request.POST.get("service")
 
-            # pdb.set_trace()
             questions.save()
             messages.success(request, "Success")
             return redirect('/survey_success/')
@@ -63,10 +73,12 @@ def complete_support_survey(request, pk):
             messages.error(request, "Invalid Data")
     else:
         support_feedback_form = SupportQuestionsForm()
+        support_options_form = SupportOptionsForm()
     return render(
         request,
         'survey/support_feedback_form.html',
         {
-            'support_feedback_form': support_feedback_form
+            'support_feedback_form': support_feedback_form,
+            'support_options_form': support_options_form
         }
         )

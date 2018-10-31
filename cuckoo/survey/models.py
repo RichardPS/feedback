@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.db import models
 
+
 # Create your models here.
 class SupportSurvey(models.Model):
     """ inital data required for survey """
