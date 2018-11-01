@@ -22,14 +22,13 @@ class SupportSurvey(models.Model):
 
 class SupportQuestions(models.Model):
     """ Questions for support servey """
-    support_survey = models.OneToOneField(
-        SupportSurvey,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        )
+    support_survey = models.ForeignKey(SupportSurvey, on_delete=models.CASCADE)
     quality = models.DecimalField(max_digits=5, decimal_places=2)
     speed = models.DecimalField(max_digits=5, decimal_places=2)
     service = models.DecimalField(max_digits=5, decimal_places=2)
     comment = models.TextField(blank=True)
     marketing = models.BooleanField(default=False)
     date_submitted = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{0}'.format(self.support_survey.domain)

@@ -5,14 +5,10 @@
 </head>
 <body>
 {% for survey in all_support_feedback %}
-    {{ survey.support_survey }}
-    {{ survey.support_survey.created }}
-    {{ survey.quality }}
-    {{ survey.speed }}
-    {{ survey.service }}
-    {{ survey.comment }}
-    {{ survey.marketing }}
-    {{ survey.date_submitted }}
+<div>
+    {{ survey.domain }}
+    {{ survey.supportquestions_set.first.comment }}
+</div>
 {% endfor %}
 </body>
 </html>

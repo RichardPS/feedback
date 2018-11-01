@@ -16,6 +16,7 @@ from .models import SupportQuestions
 @login_required
 def create_support_survey(request):
     """ create support survey form """
+    page_name = "Create Support Survey"
     if request.method == 'POST':
         create_support_survey_form = SupportSurveyForm(request.POST)
         regarding = request.POST.get("regarding").split(",")
@@ -48,7 +49,8 @@ def create_support_survey(request):
         request,
         'survey/create_support_survey.html',
         {
-            'create_support_survey_form': create_support_survey_form
+            'page_name': page_name,
+            'create_support_survey_form': create_support_survey_form,
         }
         )
 
@@ -94,10 +96,12 @@ def survey_success(request):
 
 def view_support_surverys(request):
     """ admin view all surveys """
-    all_support_feedback = SupportQuestions.objects.all()
+    all_support_feedback = SupportSurvey.objects.all()
     # pdb.set_trace()
     return render(
         request,
         'survey/view-support-surverys.html',
-        {'all_support_feedback': all_support_feedback}
+        {
+            'all_support_feedback': all_support_feedback
+        }
         )
