@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, get_object_or_404
 
 import pdb
@@ -33,7 +34,7 @@ def create_support_survey(request):
             messages.success(request, "Success")
             messages.info(request, "{0}/support-survey/{1}".format(
                 request.META['HTTP_HOST'],
-                survey.pk)
+                survey.uuid)
             )
 
             # pdb.set_trace()
@@ -52,14 +53,14 @@ def create_support_survey(request):
         )
 
 
-def complete_support_survey(request, pk):
+def complete_support_survey(request, uuid):
     """ create feedback form """
     if request.method == 'POST':
-        support_survey = SupportSurvey.objects.get(pk=pk)
+        support_survey = SupportSurvey.objects.get(uuid=uuid)
         support_feedback_form = SupportQuestionsForm(request.POST)
         support_options_form = SupportOptionsForm(request.POST)
         if support_feedback_form.is_valid():
-            pdb.set_trace()
+            # pdb.set_trace()
             questions = support_feedback_form.save(commit=False)
             questions.support_survey = support_survey
             questions.quality = request.POST.get("quality")
@@ -68,9 +69,10 @@ def complete_support_survey(request, pk):
 
             questions.save()
             messages.success(request, "Success")
-            return redirect('/survey_success/')
+            return redirect('/survey-success/')
         else:
             messages.error(request, "Invalid Data")
+
     else:
         support_feedback_form = SupportQuestionsForm()
         support_options_form = SupportOptionsForm()
@@ -81,4 +83,21 @@ def complete_support_survey(request, pk):
             'support_feedback_form': support_feedback_form,
             'support_options_form': support_options_form
         }
+        )
+
+def survey_success(request):
+    return render(
+        request,
+        'survey/survey-success.html',
+        {}
+        )
+
+def view_support_surverys(request):
+    """ admin view all surveys """
+    all_support_feedback = SupportQuestions.objects.all()
+    # pdb.set_trace()
+    return render(
+        request,
+        'survey/view-support-surverys.html',
+        {'all_support_feedback': all_support_feedback}
         )

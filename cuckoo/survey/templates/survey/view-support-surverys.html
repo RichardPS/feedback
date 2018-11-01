@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+{% for survey in all_support_feedback %}
+    {{ survey.support_survey }}
+    {{ survey.support_survey.created }}
+    {{ survey.quality }}
+    {{ survey.speed }}
+    {{ survey.service }}
+    {{ survey.comment }}
+    {{ survey.marketing }}
+    {{ survey.date_submitted }}
+{% endfor %}
+</body>
+</html>
