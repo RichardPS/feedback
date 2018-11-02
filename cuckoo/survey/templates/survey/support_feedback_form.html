@@ -1,42 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-        <li {% if message.tags %} class="{{ message.tags}}" {% endif %}>
-            {{ message }}
-        </li>
-    {% endfor %}
-</ul>
-{% endif %}
-<section class="support_feedback">
-    <form class="support_feedback_form" method="POST">
-        {% csrf_token %}
-        <!--
-        <label>Quality of work</label><br>
-        <input type="radio" name="quality" value="0">Unsatifactory<br>
-        <input type="radio" name="quality" value="50">Satifactory<br>
-        <input type="radio" name="quality" value="100">Excelent<br>
-        <br>
-        <label>Speed of work</label><br>
-        <input type="radio" name="speed" value="0">Unsatifactory<br>
-        <input type="radio" name="speed" value="50">Satifactory<br>
-        <input type="radio" name="speed" value="100">Excelent<br>
-        <br>
-        <label>Customer Service</label><br>
-        <input type="radio" name="service" value="0">Unsatifactory<br>
-        <input type="radio" name="service" value="50">Satifactory<br>
-        <input type="radio" name="service" value="100">Excelent<br>
-        -->
-        {{ support_options_form }}
-        {{ support_feedback_form }}<br>
-        <input type="submit" value="Submit">
-    </form>
-</section>
+{% extends "survey/template.html" %}
 
-</body>
-</html>
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags}}" {% endif %}>
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <section class="support_feedback">
+        <form class="support_feedback_form" method="POST">
+            {% csrf_token %}
+            {{ support_options_form }}
+            {{ support_feedback_form }}<br>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+{% endblock content %}
+
+{% block scripts %}{% endblock scripts %}

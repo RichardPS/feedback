@@ -20,7 +20,7 @@ def create_support_survey(request):
     if request.method == 'POST':
         create_support_survey_form = SupportSurveyForm(request.POST)
         regarding = request.POST.get("regarding").split(",")
-        # pdb.set_trace()
+
         if create_support_survey_form.is_valid() and len(regarding) == 7:
             survey = create_support_survey_form.save(commit=False)
             survey.price = regarding[0]
@@ -37,8 +37,6 @@ def create_support_survey(request):
                 request.META['HTTP_HOST'],
                 survey.uuid)
             )
-
-            # pdb.set_trace()
 
             return redirect('/create-support-survey/')
         else:
@@ -62,7 +60,6 @@ def complete_support_survey(request, uuid):
         support_feedback_form = SupportQuestionsForm(request.POST)
         support_options_form = SupportOptionsForm(request.POST)
         if support_feedback_form.is_valid():
-            # pdb.set_trace()
             questions = support_feedback_form.save(commit=False)
             questions.support_survey = support_survey
             questions.quality = request.POST.get("quality")
@@ -87,6 +84,7 @@ def complete_support_survey(request, uuid):
         }
         )
 
+
 def survey_success(request):
     return render(
         request,
@@ -94,10 +92,11 @@ def survey_success(request):
         {}
         )
 
+
+@login_required
 def view_support_surverys(request):
     """ admin view all surveys """
     all_support_feedback = SupportSurvey.objects.all()
-    # pdb.set_trace()
     return render(
         request,
         'survey/view-support-surverys.html',

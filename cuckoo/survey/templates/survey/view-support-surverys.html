@@ -1,14 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-{% for survey in all_support_feedback %}
-<div>
-    {{ survey.domain }}
-    {{ survey.supportquestions_set.first.comment }}
-</div>
-{% endfor %}
-</body>
-</html>
+{% extends "survey/template.html" %}
+
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+    
+    <table border="1" cellpadding="4" cellspacing="0">
+        <tr>
+            <th>Date</th>
+            <th>School</th>
+            <th>Cost</th>
+            <th>Details</th>
+            <th>Completed By</th>
+            <th>Time</th>
+            <th>Checked By</th>
+            <th>Set Up By</th>
+            <th>Quality</th>
+            <th>Speed</th>
+            <th>CS</th>
+            <th>Comments</th>
+            <th>OK For Marketing?</th>
+        </tr>
+    {% for survey in all_support_feedback %}
+        <tr>
+            <td>{{ survey.supportquestions_set.first.date_submitted }}</td>
+            <td><a href="{{ survey.domain }}" target="_blank">{{ survey.domain }}</a></td>
+            <td>{{ survey.price }}</td>
+            <td>{{ survey.details }}</td>
+            <td>{{ survey.completed_by }}</td>
+            <td>{{ survey.time }}</td>
+            <td>{{ survey.checked_by }}</td>
+            <td>{{ survey.set_up_by }}</td>
+            <td>{{ survey.supportquestions_set.first.quality }}</td>
+            <td>{{ survey.supportquestions_set.first.speed }}</td>
+            <td>{{ survey.supportquestions_set.first.service }}</td>
+            <td>{{ survey.supportquestions_set.first.comment }}</td>
+            <td>{{ survey.supportquestions_set.first.marketing }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock content %}
+
+{% block scripts %}{% endblock scripts %}
