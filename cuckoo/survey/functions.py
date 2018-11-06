@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 from .config import EMAIL_CONTACTS
 
+
 def url_check(url):
 
     PREFIX_STRING = "//"
@@ -11,6 +12,7 @@ def url_check(url):
         url_check = PREFIX_STRING + url
 
     return
+
 
 def quality_alert_check(school_domain, school_scores, department):
     # print(school_domain)
@@ -23,10 +25,12 @@ def quality_alert_check(school_domain, school_scores, department):
 
     return
 
+
 def email_low_score_alert(school_domain, school_scores, department):
 
     sendto = EMAIL_CONTACTS[department]
     # print(sendto)
+    
     send_mail(
         'Low Score Alert{0}'.format(school_domain),
         'scores go here',
@@ -34,4 +38,5 @@ def email_low_score_alert(school_domain, school_scores, department):
         [sendto],
         fail_silently=False,
         )
+
     return

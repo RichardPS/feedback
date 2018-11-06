@@ -16,6 +16,10 @@ urlpatterns = [
         views.view_support_surverys,
         name='view_support_surverys'
         ),
+    url(r'^view-all-support-surverys/$',
+        views.view_all_support_surveys,
+        name='view_all_support_surveys'
+        ),
     url(r'^survey-success/$',
         views.survey_success,
         name='survey_success'

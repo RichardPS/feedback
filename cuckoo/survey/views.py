@@ -63,6 +63,7 @@ def complete_support_survey(request, uuid):
         support_options_form = SupportOptionsForm(request.POST)
         if support_feedback_form.is_valid():
             """
+            # Check feedback scores and email if low
             result = quality_alert_check(
                 support_survey.domain,
                 [
@@ -113,6 +114,17 @@ def view_support_surverys(request):
     return render(
         request,
         'survey/view-support-surverys.html',
+        {
+            'all_support_feedback': all_support_feedback
+        }
+        )
+
+@login_required
+def view_all_support_surveys(request):
+    all_support_feedback = SupportQuestions.objects.all()
+    return render(
+        request,
+        'survey/view-all-support-surverys.html',
         {
             'all_support_feedback': all_support_feedback
         }
