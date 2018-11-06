@@ -11,6 +11,8 @@ from .forms import SupportQuestionsForm
 from .models import SupportSurvey
 from .models import SupportQuestions
 
+from .functions import quality_alert_check
+
 
 # Create your views here.
 @login_required
@@ -60,6 +62,17 @@ def complete_support_survey(request, uuid):
         support_feedback_form = SupportQuestionsForm(request.POST)
         support_options_form = SupportOptionsForm(request.POST)
         if support_feedback_form.is_valid():
+            """
+            result = quality_alert_check(
+                support_survey.domain,
+                [
+                request.POST.get("quality"),
+                request.POST.get("speed"),
+                request.POST.get("service"),
+                ],
+                "support"
+                )
+            """
             questions = support_feedback_form.save(commit=False)
             questions.support_survey = support_survey
             questions.quality = request.POST.get("quality")
