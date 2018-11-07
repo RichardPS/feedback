@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 from .config import EMAIL_CONTACTS
 
+from datetime import datetime
 
 def url_check(url):
 
@@ -40,3 +41,11 @@ def email_low_score_alert(school_domain, school_scores, department):
         )
 
     return
+
+
+def convert_str_to_date(date_str):
+
+    format_str = '%Y-%m-%d'
+    datetime_object = datetime.strptime(date_str, format_str)
+
+    return datetime_object.date()

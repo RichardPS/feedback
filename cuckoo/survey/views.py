@@ -1,8 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.serializers import serialize
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
+import json
 import pdb
 
 from .forms import SupportOptionsForm
@@ -11,6 +15,7 @@ from .forms import SupportQuestionsForm
 from .models import SupportSurvey
 from .models import SupportQuestions
 
+from .functions import convert_str_to_date
 from .functions import quality_alert_check
 
 
@@ -129,3 +134,23 @@ def view_all_support_surveys(request):
             'all_support_feedback': all_support_feedback
         }
         )
+
+
+def json_support(request, startdate, enddate):
+
+    print(startdate)
+    print(enddate)
+
+    startdate = convert_str_to_date(startdate)
+    enddate = convert_str_to_date(enddate)
+
+    all_support_feedback = SupportQuestions.objects.filter(
+        date_submitted__range=(
+            startdate,
+            enddate
+            )
+        ).distinct()
+
+    json_data = serialize('json', all_support_feedback)
+
+    return HttpResponse(json_data, content_type='application/json')
