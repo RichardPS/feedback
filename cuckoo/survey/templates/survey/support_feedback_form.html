@@ -2,7 +2,11 @@
 
 {% block styles %}{% endblock styles %}
 
+{% block header %}{% endblock header %}
+
 {% block content %}
+
+    {{ support_intro_text }}
 
     {% if messages %}
     <ul class="messages">
@@ -24,5 +28,7 @@
     </section>
 
 {% endblock content %}
+
+{% block footer %}{% endblock footer %}
 
 {% block scripts %}{% endblock scripts %}

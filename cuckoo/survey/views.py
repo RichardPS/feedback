@@ -15,6 +15,7 @@ from .forms import SupportQuestionsForm
 from .models import SupportSurvey
 from .models import SupportQuestions
 
+from .config import SUPPORT_INTRO_TEXT
 from .functions import convert_str_to_date
 from .functions import quality_alert_check
 
@@ -24,6 +25,7 @@ from .functions import quality_alert_check
 def create_support_survey(request):
     """ create support survey form """
     page_name = "Create Support Survey"
+    support_intro_text = SUPPORT_INTRO_TEXT
     if request.method == 'POST':
         create_support_survey_form = SupportSurveyForm(request.POST)
         regarding = request.POST.get("regarding").split(",")
@@ -54,6 +56,7 @@ def create_support_survey(request):
         request,
         'survey/create_support_survey.html',
         {
+            'support_intro_text': support_intro_text,
             'page_name': page_name,
             'create_support_survey_form': create_support_survey_form,
         }
@@ -67,18 +70,6 @@ def complete_support_survey(request, uuid):
         support_feedback_form = SupportQuestionsForm(request.POST)
         support_options_form = SupportOptionsForm(request.POST)
         if support_feedback_form.is_valid():
-            """
-            # Check feedback scores and email if low
-            result = quality_alert_check(
-                support_survey.domain,
-                [
-                request.POST.get("quality"),
-                request.POST.get("speed"),
-                request.POST.get("service"),
-                ],
-                "support"
-                )
-            """
             questions = support_feedback_form.save(commit=False)
             questions.support_survey = support_survey
             questions.quality = request.POST.get("quality")
