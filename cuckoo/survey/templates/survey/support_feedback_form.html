@@ -5,18 +5,21 @@
 {% block header %}{% endblock header %}
 
 {% block content %}
+    <section class="message-block">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags}}" {% endif %}>
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </section>
 
-    {{ support_intro_text }}
-
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags}}" {% endif %}>
-                {{ message }}
-            </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+    <section class="intro-text">
+        {{ support_intro_text |safe }}
+    </section>
     
     <section class="support_feedback">
         <form class="support_feedback_form" method="POST">

@@ -1,12 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 
-import json
 import pdb
 
 from .forms import SupportOptionsForm
@@ -15,30 +12,37 @@ from .forms import SupportQuestionsForm
 from .models import SupportSurvey
 from .models import SupportQuestions
 
+from .config import FEEDBACK_THANKYOU_MESSAGE
 from .config import SUPPORT_INTRO_TEXT
 from .functions import convert_str_to_date
 from .functions import quality_alert_check
+from .functions import url_check
 
 
 # Create your views here.
+def error_404(request):
+    return render(request, 'survey/404.html')
+
+
 @login_required
 def create_support_survey(request):
     """ create support survey form """
     page_name = "Create Support Survey"
-    support_intro_text = SUPPORT_INTRO_TEXT
     if request.method == 'POST':
         create_support_survey_form = SupportSurveyForm(request.POST)
         regarding = request.POST.get("regarding").split(",")
 
         if create_support_survey_form.is_valid() and len(regarding) == 7:
+
             survey = create_support_survey_form.save(commit=False)
+            survey.domain = url_check(request.POST.get("domain"))
             survey.price = regarding[0]
             survey.details = regarding[1]
             survey.completed_by = regarding[2]
             survey.time = regarding[3]
             survey.checked_by = regarding[4]
             survey.set_up_by = regarding[5]
-            
+
             survey.save()
 
             messages.success(request, "Success")
@@ -56,7 +60,6 @@ def create_support_survey(request):
         request,
         'survey/create_support_survey.html',
         {
-            'support_intro_text': support_intro_text,
             'page_name': page_name,
             'create_support_survey_form': create_support_survey_form,
         }
@@ -65,6 +68,7 @@ def create_support_survey(request):
 
 def complete_support_survey(request, uuid):
     """ create feedback form """
+    support_intro_text = SUPPORT_INTRO_TEXT
     if request.method == 'POST':
         support_survey = SupportSurvey.objects.get(uuid=uuid)
         support_feedback_form = SupportQuestionsForm(request.POST)
@@ -89,6 +93,7 @@ def complete_support_survey(request, uuid):
         request,
         'survey/support_feedback_form.html',
         {
+            'support_intro_text': support_intro_text,
             'support_feedback_form': support_feedback_form,
             'support_options_form': support_options_form
         }
@@ -96,10 +101,13 @@ def complete_support_survey(request, uuid):
 
 
 def survey_success(request):
+    feedback_thankyou_message = FEEDBACK_THANKYOU_MESSAGE
     return render(
         request,
         'survey/survey-success.html',
-        {}
+        {
+            'feedback_thankyou_message': feedback_thankyou_message,
+        }
         )
 
 
@@ -115,6 +123,7 @@ def view_support_surverys(request):
         }
         )
 
+
 @login_required
 def view_all_support_surveys(request):
     all_support_feedback = SupportQuestions.objects.all()
@@ -128,10 +137,6 @@ def view_all_support_surveys(request):
 
 
 def json_support(request, startdate, enddate):
-
-    print(startdate)
-    print(enddate)
-
     startdate = convert_str_to_date(startdate)
     enddate = convert_str_to_date(enddate)
 

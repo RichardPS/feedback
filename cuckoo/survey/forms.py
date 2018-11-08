@@ -3,12 +3,7 @@ from django.forms import ModelForm
 from .models import SupportSurvey
 from .models import SupportQuestions
 
-
-QUESTION_OPTIONS = (
-    ('0', 'Unsatifactory'),
-    ('50', 'Satifactory'),
-    ('100', 'Excelent'),
-    )
+from .config import QUESTION_OPTIONS
 
 
 class SupportSurveyForm(ModelForm):

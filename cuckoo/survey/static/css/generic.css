@@ -1,2 +1,40 @@
 /* GENERIC STYLES
 ================= */
+@font-face {
+    font-family: 'Glyphter';
+    src: url('../fonts/Glyphter.eot');
+    src: url('../fonts/Glyphter.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Glyphter.woff') format('woff'),
+         url('../fonts/Glyphter.ttf') format('truetype'),
+         url('../fonts/Glyphter.svg#Glyphter') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class*='icon-']:before{
+  display: inline-block;
+   font-family: 'Glyphter';
+   font-style: normal;
+   font-weight: normal;
+   line-height: 1;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale
+}
+
+.ps-pink {
+  color: #ed7983;
+}
+
+/*
+.icon-unsatifactory:before{content:'\0041';}
+.icon-satifactory:before{content:'\0042';}
+.icon-excelent:before{content:'\0043';}
+*/
+.icon-primarysite:before {
+  content:'\0044';
+  color: #ed7983;
+}
+
+html, body {
+    font-family: 'Open Sans', sans-serif;
+}
