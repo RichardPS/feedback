@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+from .site_config import USER, PASSWORD
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -85,8 +87,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'django',
-        'USER': 'django',
-        'PASSWORD': 'django',
+        'USER': USER,
+        'PASSWORD': PASSWORD,
         'HOST': 'localhost',
         'POST': '',
     }

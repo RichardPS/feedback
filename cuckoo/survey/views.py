@@ -101,6 +101,7 @@ def complete_support_survey(request, uuid):
 
 
 def survey_success(request):
+    """ survey succes page """
     feedback_thankyou_message = FEEDBACK_THANKYOU_MESSAGE
     return render(
         request,
@@ -113,7 +114,7 @@ def survey_success(request):
 
 @login_required
 def view_support_surverys(request):
-    """ admin view all surveys """
+    """ admin view first surveys """
     all_support_feedback = SupportQuestions.objects.all().distinct('support_survey')
     return render(
         request,
@@ -126,6 +127,7 @@ def view_support_surverys(request):
 
 @login_required
 def view_all_support_surveys(request):
+    """ admin view all surveys """
     all_support_feedback = SupportQuestions.objects.all()
     return render(
         request,
@@ -137,6 +139,7 @@ def view_all_support_surveys(request):
 
 
 def json_support(request, startdate, enddate):
+    """ admin view first surveys as json """
     startdate = convert_str_to_date(startdate)
     enddate = convert_str_to_date(enddate)
 

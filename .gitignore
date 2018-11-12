@@ -3,3 +3,6 @@ __pycache__/
 
 *.pyc
 *.sqlite3
+
+site_config.py
+site_config.pyc
