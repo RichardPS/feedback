@@ -13,6 +13,7 @@
     <link rel='shortcut icon' href='{% static "images/favicon.ico" %}'>
     <link rel='apple-touch-icon' href='{% static "images/apple-touch-icon-precomposed.png" %}'>
     <link rel='apple-touch-icon-precomposed' href='{% static "images/apple-touch-icon-precomposed.png" %}'>
+
     {# WINDOWS 8 TILE ICON #}
     <meta name='application-name' content='PrimarySite Customer Feedback'>
     <meta name='msapplication-TileColor' content='#00aaef'>
@@ -20,7 +21,7 @@
 
     {# STYLESHEETS #}
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' href='{% static "css/generic.css" %}'>
+    <link rel='stylesheet' type='text/css' href='{% static "css/style.css" %}'>
 
     {% block styles %}{% endblock styles %}
 
@@ -40,7 +41,7 @@
         {% block footer %}{% endblock footer %}
     </footer>
 
-    <script type='text/javascript' src='#'></script>
+    <script type='text/javascript' src='{% static "js/feedback.js" %}'></script>
     {% block scripts %}{% endblock scripts %}
 </body>
 </html>

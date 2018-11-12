@@ -3,7 +3,7 @@
 {% block styles %}{% endblock styles %}
 
 {% block content %}
-    
+
     <table border="1" cellpadding="4" cellspacing="0">
         <tr>
             <th>Date</th>
@@ -22,19 +22,19 @@
         </tr>
     {% for survey in all_support_feedback %}
         <tr>
-            <td>{{ survey.supportquestions_set.first.date_submitted }}</td>
-            <td><a href="{{ survey.domain }}" target="_blank">{{ survey.domain }}</a></td>
-            <td>{{ survey.price }}</td>
-            <td>{{ survey.details }}</td>
-            <td>{{ survey.completed_by }}</td>
-            <td>{{ survey.time }}</td>
-            <td>{{ survey.checked_by }}</td>
-            <td>{{ survey.set_up_by }}</td>
-            <td>{{ survey.supportquestions_set.first.quality }}</td>
-            <td>{{ survey.supportquestions_set.first.speed }}</td>
-            <td>{{ survey.supportquestions_set.first.service }}</td>
-            <td>{{ survey.supportquestions_set.first.comment }}</td>
-            <td>{{ survey.supportquestions_set.first.marketing }}</td>
+            <td>{{ survey.date_submitted }}</td>
+            <td><a href="{{ survey.support_survey.domain }}" target="_blank">{{ survey.support_survey.domain }}</a></td>
+            <td>{{ survey.support_survey.price }}</td>
+            <td>{{ survey.support_survey.details }}</td>
+            <td>{{ survey.support_survey.completed_by }}</td>
+            <td>{{ survey.support_survey.time }}</td>
+            <td>{{ survey.support_survey.checked_by }}</td>
+            <td>{{ survey.support_survey.set_up_by }}</td>
+            <td>{{ survey.quality }}</td>
+            <td>{{ survey.speed }}</td>
+            <td>{{ survey.service }}</td>
+            <td>{{ survey.comment }}</td>
+            <td>{{ survey.marketing }}</td>
         </tr>
     {% endfor %}
     </table>

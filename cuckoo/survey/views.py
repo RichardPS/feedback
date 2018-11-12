@@ -114,7 +114,7 @@ def survey_success(request):
 @login_required
 def view_support_surverys(request):
     """ admin view all surveys """
-    all_support_feedback = SupportSurvey.objects.all()
+    all_support_feedback = SupportQuestions.objects.all().distinct('support_survey')
     return render(
         request,
         'survey/view-support-surverys.html',
@@ -129,7 +129,7 @@ def view_all_support_surveys(request):
     all_support_feedback = SupportQuestions.objects.all()
     return render(
         request,
-        'survey/view-all-support-surverys.html',
+        'survey/view-support-surverys.html',
         {
             'all_support_feedback': all_support_feedback
         }
@@ -145,7 +145,7 @@ def json_support(request, startdate, enddate):
             startdate,
             enddate
             )
-        ).distinct()
+        ).distinct('support_survey')
 
     json_data = serialize('json', all_support_feedback)
 

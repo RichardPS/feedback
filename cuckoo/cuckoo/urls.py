@@ -13,10 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include, url, handler404
 from django.contrib import admin
 
 urlpatterns = [
     url(r'^backoffice/', admin.site.urls),
     url(r'^', include('survey.urls'))
 ]
+handler404 = 'survey.views.error_404'

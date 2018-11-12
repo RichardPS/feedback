@@ -5,7 +5,7 @@ from datetime import datetime
 import pdb
 
 def url_check(url):
-
+    """ adds http to url if not present """
     PREFIX_STRING = "http://"
     start_of_url = url[0:4]
 
@@ -16,7 +16,7 @@ def url_check(url):
 
 
 def quality_alert_check(school_domain, school_scores, department):
-
+    """ check is scores are low """
     for score in school_scores:
         if int(score) < 50:
             email_low_score_alert(school_domain, school_scores, department)
@@ -25,9 +25,9 @@ def quality_alert_check(school_domain, school_scores, department):
 
 
 def email_low_score_alert(school_domain, school_scores, department):
-
+    """ email manager if scores are low """
     sendto = EMAIL_CONTACTS[department]
-    
+
     send_mail(
         'Low Score Alert{0}'.format(school_domain),
         'scores go here',
@@ -40,7 +40,7 @@ def email_low_score_alert(school_domain, school_scores, department):
 
 
 def convert_str_to_date(date_str):
-
+    """ convert string date into date """
     format_str = '%Y-%m-%d'
     datetime_object = datetime.strptime(date_str, format_str)
 

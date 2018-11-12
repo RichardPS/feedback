@@ -1,5 +1,4 @@
 from django.conf.urls import url
-from django.conf.urls import handler404
 
 from . import views
 
@@ -30,4 +29,3 @@ urlpatterns = [
         name='survey_success'
         )
 ]
-handler404 = 'survey.views.error_404'

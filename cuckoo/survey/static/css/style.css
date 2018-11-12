@@ -11,6 +11,16 @@
     font-style: normal;
 }
 
+html {
+  font-size: 62.5%;
+  background-color: #fff;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6em;
+}
+
 [class*='icon-']:before{
   display: inline-block;
    font-family: 'Glyphter';
@@ -21,20 +31,14 @@
    -moz-osx-font-smoothing: grayscale
 }
 
-.ps-pink {
-  color: #ed7983;
-}
-
 /*
 .icon-unsatifactory:before{content:'\0041';}
 .icon-satifactory:before{content:'\0042';}
 .icon-excelent:before{content:'\0043';}
 */
+
 .icon-primarysite:before {
   content:'\0044';
   color: #ed7983;
-}
-
-html, body {
-    font-family: 'Open Sans', sans-serif;
+  font-size: 1.6rem;
 }
