@@ -1,5 +1,6 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, DateInput
+from .models import LaunchSurvey
 from .models import SupportSurvey
 from .models import SupportQuestions
 
@@ -20,6 +21,13 @@ class SupportQuestionsForm(ModelForm):
             'comment': ('Your Comments'),
             'marketing': ('OK for marketing?')
         }
+
+
+class LaunchSurveyForm(ModelForm):
+    class Meta:
+        model = LaunchSurvey
+        fields = ['domain', 'advisor', 'sales', 'ordered', 'launched']
+
 
 
 class SupportOptionsForm(forms.Form):

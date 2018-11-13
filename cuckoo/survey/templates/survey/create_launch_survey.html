@@ -16,10 +16,9 @@
 
 
     <section class="create_survey">
-        <form class="create_survey_form" method="POST">
+        <form class="create_launch_survey" method="POST">
             {% csrf_token %}
-            {{ create_support_survey_form.as_ul }}
-            <li>Regarding: <input type="text" name="regarding" required></li>
+            {{ create_launch_survey_form.as_ul }}<br>
             <input type="submit" value="Create">
         </form>
     </section>

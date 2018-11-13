@@ -2,10 +2,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.serializers import serialize
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 
 import pdb
 
+from .forms import LaunchSurveyForm
 from .forms import SupportOptionsForm
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
@@ -20,8 +21,13 @@ from .functions import url_check
 
 
 # Create your views here.
-def error_404(request):
-    return render(request, 'survey/404.html')
+def page_not_found(request):
+    response = render_to_response(
+        'survey/404.html',
+        context_instance=RequestContext(request)
+        )
+    response.status_code = 404
+    return response
 
 
 @login_required
@@ -51,7 +57,7 @@ def create_support_survey(request):
                 survey.uuid)
             )
 
-            return redirect('/create-support-survey/')
+            return redirect('/create/support/')
         else:
             messages.error(request, "Invalid Data")
     else:
@@ -153,3 +159,24 @@ def json_support(request, startdate, enddate):
     json_data = serialize('json', all_support_feedback)
 
     return HttpResponse(json_data, content_type='application/json')
+
+
+@login_required
+def create_launch_survey(request):
+    """ create launch survey """
+    if request.method == 'POST':
+        create_launch_survey_form = LaunchSurveyForm(request.POST)
+        if create_launch_survey.is_valid():
+            survey = create_launch_survey.save(commit=False)
+        else:
+            messages.error(request, "Invalid Data")
+    else:
+        create_launch_survey_form = LaunchSurveyForm()
+
+    return render(
+        request,
+        'survey/create_launch_survey.html',
+        {
+            'create_launch_survey_form': create_launch_survey_form
+        }
+        )

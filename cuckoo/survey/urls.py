@@ -1,22 +1,22 @@
-from django.conf.urls import url
+from django.conf.urls import url, handler404
 
 from . import views
 
 urlpatterns = [
     url(
-        r'^create-support-survey/$',
+        r'^create/support/$',
         views.create_support_survey,
         name='create_support_survey'
         ),
-    url(r'^support-survey/(?P<uuid>\S+)$',
+    url(r'^survey/support/(?P<uuid>\S+)$',
         views.complete_support_survey,
         name='complete_support_survey'
         ),
-    url(r'^view-support-surverys/$',
+    url(r'^view/support/$',
         views.view_support_surverys,
         name='view_support_surverys'
         ),
-    url(r'^view-all-support-surverys/$',
+    url(r'^view/all-support/$',
         views.view_all_support_surveys,
         name='view_all_support_surveys'
         ),
@@ -27,5 +27,10 @@ urlpatterns = [
     url(r'^survey-success/$',
         views.survey_success,
         name='survey_success'
+        ),
+    url(r'^create/launch/$',
+        views.create_launch_survey,
+        name='create_launch_survey'
         )
 ]
+handler404 = 'survey.views.page_not_found'

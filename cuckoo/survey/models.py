@@ -32,3 +32,28 @@ class SupportQuestions(models.Model):
 
     def __str__(self):
         return '{0}'.format(self.support_survey.domain)
+
+
+class LaunchSurvey(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    domain = models.CharField(max_length=255)
+    advisor = models.CharField(max_length=255)
+    sales = models.CharField(max_length=255)
+    ordered = models.DateField(auto_now_add=False, auto_now=False, blank=False)
+    launched = models.DateField(auto_now_add=False, auto_now=False, blank=False)
+
+    def __str__(self):
+        return '{0}'.format(self.domain)
+
+
+class launchQuestions(models.Model):
+    launch_survey = models.ForeignKey(LaunchSurvey, on_delete=models.CASCADE)
+    quality = models.DecimalField(max_digits=5, decimal_places=2)
+    speed = models.DecimalField(max_digits=5, decimal_places=2)
+    service = models.DecimalField(max_digits=5, decimal_places=2)
+    comment = models.TextField(blank=True)
+    marketing = models.BooleanField(default=False)
+    date_submitted = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{0}'.format(self.launch_survey.domain)
