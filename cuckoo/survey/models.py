@@ -46,7 +46,7 @@ class LaunchSurvey(models.Model):
         return '{0}'.format(self.domain)
 
 
-class launchQuestions(models.Model):
+class LaunchQuestions(models.Model):
     launch_survey = models.ForeignKey(LaunchSurvey, on_delete=models.CASCADE)
     quality = models.DecimalField(max_digits=5, decimal_places=2)
     speed = models.DecimalField(max_digits=5, decimal_places=2)

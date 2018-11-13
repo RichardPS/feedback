@@ -31,6 +31,10 @@ urlpatterns = [
     url(r'^create/launch/$',
         views.create_launch_survey,
         name='create_launch_survey'
+        ),
+    url(r'^survey/launch/(?P<uuid>\S+)$',
+        views.complete_launch_survey,
+        name='complete_launch_survey'
         )
 ]
 handler404 = 'survey.views.page_not_found'

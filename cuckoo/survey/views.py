@@ -52,7 +52,7 @@ def create_support_survey(request):
             survey.save()
 
             messages.success(request, "Success")
-            messages.info(request, "{0}/support-survey/{1}".format(
+            messages.info(request, "{0}/survey/support/{1}".format(
                 request.META['HTTP_HOST'],
                 survey.uuid)
             )
@@ -166,8 +166,18 @@ def create_launch_survey(request):
     """ create launch survey """
     if request.method == 'POST':
         create_launch_survey_form = LaunchSurveyForm(request.POST)
-        if create_launch_survey.is_valid():
-            survey = create_launch_survey.save(commit=False)
+        if create_launch_survey_form.is_valid():
+            survey = create_launch_survey_form.save(commit=False)
+            # pdb.set_trace()
+            survey.save()
+
+            messages.success(request, "Success")
+            messages.info(request, "{0}/survey/launch/{1}".format(
+                request.META['HTTP_HOST'],
+                survey.uuid)
+            )
+
+            return redirect('/create/launch/')
         else:
             messages.error(request, "Invalid Data")
     else:
@@ -179,4 +189,14 @@ def create_launch_survey(request):
         {
             'create_launch_survey_form': create_launch_survey_form
         }
+        )
+
+
+def complete_launch_survey(request, uuid):
+    """ create feedback form """
+
+    return render(
+        request,
+        'survey/support_feedback_form.html',
+        {}
         )

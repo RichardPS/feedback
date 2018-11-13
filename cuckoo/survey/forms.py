@@ -1,11 +1,14 @@
 from django import forms
-from django.forms import ModelForm, DateInput
+from django.forms import ModelForm, SelectDateWidget
+from django.forms.widgets import TextInput
 from .models import LaunchSurvey
 from .models import SupportSurvey
 from .models import SupportQuestions
 
 from .config import QUESTION_OPTIONS
 
+class MyDateInput(TextInput):
+    input_type = 'date'
 
 class SupportSurveyForm(ModelForm):
     class Meta:
@@ -24,10 +27,15 @@ class SupportQuestionsForm(ModelForm):
 
 
 class LaunchSurveyForm(ModelForm):
+    """ widget overrides """
+    def __init__(self, *args, **kwargs):
+        super(LaunchSurveyForm, self).__init__(*args, **kwargs)
+        self.fields['ordered'].widget = MyDateInput(attrs={'class':'date'})
+        self.fields['launched'].widget = MyDateInput(attrs={'class':'date'})
+
     class Meta:
         model = LaunchSurvey
         fields = ['domain', 'advisor', 'sales', 'ordered', 'launched']
-
 
 
 class SupportOptionsForm(forms.Form):
