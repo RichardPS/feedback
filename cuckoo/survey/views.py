@@ -15,6 +15,7 @@ from .models import SupportQuestions
 
 from .config import FEEDBACK_THANKYOU_MESSAGE
 from .config import SUPPORT_INTRO_TEXT
+from .config import LAUNCH_INTRO_TEXT
 from .functions import convert_str_to_date
 from .functions import quality_alert_check
 from .functions import url_check
@@ -74,13 +75,13 @@ def create_support_survey(request):
 
 def complete_support_survey(request, uuid):
     """ create feedback form """
-    support_intro_text = SUPPORT_INTRO_TEXT
+    intro_text = SUPPORT_INTRO_TEXT
     if request.method == 'POST':
         support_survey = SupportSurvey.objects.get(uuid=uuid)
-        support_feedback_form = SupportQuestionsForm(request.POST)
-        support_options_form = SupportOptionsForm(request.POST)
-        if support_feedback_form.is_valid():
-            questions = support_feedback_form.save(commit=False)
+        feedback_form = SupportQuestionsForm(request.POST)
+        options_form = SupportOptionsForm(request.POST)
+        if feedback_form.is_valid():
+            questions = feedback_form.save(commit=False)
             questions.support_survey = support_survey
             questions.quality = request.POST.get("quality")
             questions.speed = request.POST.get("speed")
@@ -93,15 +94,15 @@ def complete_support_survey(request, uuid):
             messages.error(request, "Invalid Data")
 
     else:
-        support_feedback_form = SupportQuestionsForm()
-        support_options_form = SupportOptionsForm()
+        feedback_form = SupportQuestionsForm()
+        options_form = SupportOptionsForm()
     return render(
         request,
-        'survey/support_feedback_form.html',
+        'survey/feedback_form.html',
         {
-            'support_intro_text': support_intro_text,
-            'support_feedback_form': support_feedback_form,
-            'support_options_form': support_options_form
+            'intro_text': intro_text,
+            'feedback_form': feedback_form,
+            'options_form': options_form
         }
         )
 
@@ -194,9 +195,26 @@ def create_launch_survey(request):
 
 def complete_launch_survey(request, uuid):
     """ create feedback form """
+    intro_text = LAUNCH_INTRO_TEXT
+
+    if request.method == 'POST':
+        support_survey = LaunchSurvey.objects.get(uuid=uuid)
+        feedback_form = SupportQuestionsForm(request.POST)
+        options_form = SupportOptionsForm(request.POST, survey_type='launch')
+        if feedback_form.is_valid():
+            questions = feedback_form.save(commit=False)
+
+    else:
+        feedback_form = SupportQuestionsForm()
+        options_form = SupportOptionsForm(survey_type='launch')
+
 
     return render(
         request,
-        'survey/support_feedback_form.html',
-        {}
+        'survey/feedback_form.html',
+        {
+            'intro_text': intro_text,
+            'feedback_form': feedback_form,
+            'options_form': options_form
+        }
         )

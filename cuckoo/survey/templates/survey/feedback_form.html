@@ -18,14 +18,14 @@
     </section>
 
     <section class="intro-text">
-        {{ support_intro_text |safe }}
+        {{ intro_text |safe }}
     </section>
     
     <section class="support_feedback">
-        <form class="support_feedback_form" method="POST">
+        <form class="feedback_form" method="POST">
             {% csrf_token %}
-            {{ support_options_form }}
-            {{ support_feedback_form }}<br>
+            {{ options_form.as_ul }}
+            {{ feedback_form.as_ul }}<br>
             <input type="submit" value="Submit">
         </form>
     </section>

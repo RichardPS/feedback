@@ -2,9 +2,11 @@ from django import forms
 from django.forms import ModelForm, SelectDateWidget
 from django.forms.widgets import TextInput
 from .models import LaunchSurvey
+from .models import LaunchQuestions
 from .models import SupportSurvey
 from .models import SupportQuestions
 
+from .config import QUALITY_LABEL
 from .config import QUESTION_OPTIONS
 
 class MyDateInput(TextInput):
@@ -39,12 +41,26 @@ class LaunchSurveyForm(ModelForm):
 
 
 class SupportOptionsForm(forms.Form):
+    """
+    def __init__(self, *args, **kwargs):
+        survey_type = kwargs.pop('survey_type')
+        super(SupportOptionsForm, self).__init__(*args, **kwargs)
+
+        quality_label = QUALITY_LABEL[survey_type]
+    """
+
     quality = forms.MultipleChoiceField(
-            widget = forms.RadioSelect, choices=QUESTION_OPTIONS
+            widget = forms.RadioSelect,
+            choices=QUESTION_OPTIONS,
+            label='Quality',
         )
     speed = forms.MultipleChoiceField(
-            widget = forms.RadioSelect, choices=QUESTION_OPTIONS
+            widget = forms.RadioSelect,
+            choices=QUESTION_OPTIONS,
+            label='Speed',
         )
     service = forms.MultipleChoiceField(
-            widget = forms.RadioSelect, choices=QUESTION_OPTIONS
+            widget = forms.RadioSelect,
+            choices=QUESTION_OPTIONS,
+            label='Service',
         )
