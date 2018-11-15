@@ -219,3 +219,45 @@ def complete_launch_survey(request, uuid):
             'options_form': options_form
         }
         )
+
+@login_required
+def view_launch_surverys(request):
+    """ admin view first surveys """
+    all_launch_feedback = LaunchQuestions.objects.all().distinct('launch_survey')
+    return render(
+        request,
+        'survey/view-launch-surverys.html',
+        {
+            'all_launch_feedback': all_launch_feedback
+        }
+        )
+
+
+@login_required
+def view_all_launch_surveys(request):
+    """ admin view all surveys """
+    all_launch_feedback = LaunchQuestions.objects.all()
+    return render(
+        request,
+        'survey/view-launch-surverys.html',
+        {
+            'all_launch_feedback': all_launch_feedback
+        }
+        )
+
+
+def json_support(request, startdate, enddate):
+    """ admin view first surveys as json """
+    startdate = convert_str_to_date(startdate)
+    enddate = convert_str_to_date(enddate)
+
+    all_launch_feedback = LaunchQuestions.objects.filter(
+        date_submitted__range=(
+            startdate,
+            enddate
+            )
+        ).distinct('launch_survey')
+
+    json_data = serialize('json', all_launch_feedback)
+
+    return HttpResponse(json_data, content_type='application/json')
