@@ -29,6 +29,12 @@ QUALITY_LABEL = {
 
 SPEED_LABEL = {
 	'support': 'Speed of Work',
-	'launch': 'Speed of work',
+	'launch': 'Speed of Work',
 	'review': 'Speed of Review',
+}
+
+SERVICE_LABEL = {
+    'support': 'Support Customer Service',
+    'launch': 'Production Customer Service',
+    'review': 'Review Customer Service',
 }

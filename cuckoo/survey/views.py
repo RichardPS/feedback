@@ -79,7 +79,7 @@ def complete_support_survey(request, uuid):
     if request.method == 'POST':
         support_survey = SupportSurvey.objects.get(uuid=uuid)
         feedback_form = SupportQuestionsForm(request.POST)
-        options_form = SupportOptionsForm(request.POST)
+        options_form = SupportOptionsForm(request.POST, survey_type='support')
         if feedback_form.is_valid():
             questions = feedback_form.save(commit=False)
             questions.support_survey = support_survey
@@ -95,7 +95,7 @@ def complete_support_survey(request, uuid):
 
     else:
         feedback_form = SupportQuestionsForm()
-        options_form = SupportOptionsForm()
+        options_form = SupportOptionsForm(survey_type='support')
     return render(
         request,
         'survey/feedback_form.html',
@@ -169,7 +169,8 @@ def create_launch_survey(request):
         create_launch_survey_form = LaunchSurveyForm(request.POST)
         if create_launch_survey_form.is_valid():
             survey = create_launch_survey_form.save(commit=False)
-            # pdb.set_trace()
+            survey.domain = url_check(request.POST.get("domain"))
+
             survey.save()
 
             messages.success(request, "Success")

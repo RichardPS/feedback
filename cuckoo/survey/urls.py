@@ -12,11 +12,11 @@ urlpatterns = [
         views.complete_support_survey,
         name='complete_support_survey'
         ),
-    url(r'^view/support/$',
+    url(r'^admin/support/$',
         views.view_support_surverys,
         name='view_support_surverys'
         ),
-    url(r'^view/all-support/$',
+    url(r'^admin/all-support/$',
         views.view_all_support_surveys,
         name='view_all_support_surveys'
         ),
@@ -35,6 +35,18 @@ urlpatterns = [
     url(r'^survey/launch/(?P<uuid>\S+)$',
         views.complete_launch_survey,
         name='complete_launch_survey'
+        ),
+    url(r'^admin/launch/$',
+        views.view_launch_surveys,
+        name='view_launch_surveys'
+        ),
+    url(r'^admin/all-launch/$',
+        views.view_all_launch_surveys,
+        name='view_all_launch_surveys'
+        ),
+    url(r'^json/launch/(?P<startdate>\d{4}-\d{2}-\d{2})/(?P<enddate>\d{4}-\d{2}-\d{2})/$',
+        views.json_launch,
+        name='json_launch'
         )
 ]
 handler404 = 'survey.views.page_not_found'
