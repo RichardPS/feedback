@@ -20,3 +20,4 @@ urlpatterns = [
     url(r'^backoffice/', admin.site.urls),
     url(r'^', include('survey.urls'))
 ]
+handler404 = 'survey.views.page_not_found'

@@ -21,6 +21,12 @@ THREE_MONTH_INTRO_TEXT = "<p>Some intro blurb for the three month feedback form<
 FEEDBACK_THANKYOU_MESSAGE = "<p>Thank you for your feedback</p>"
 
 """ question labels """
+SUPPORT_LABELS = {
+    'quality': 'Quality of Work',
+    'speed': 'Speed of Work',
+    'service': 'Quality of Service',
+}
+
 QUALITY_LABEL = {
 	'support': 'Quality of Work',
 	'launch': 'Quality of Design',
@@ -38,3 +44,7 @@ SERVICE_LABEL = {
     'launch': 'Production Customer Service',
     'review': 'Review Customer Service',
 }
+
+
+""" ERROR CODES """
+PAGE_NOT_FOUND = 404

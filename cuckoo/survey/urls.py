@@ -27,7 +27,10 @@ urlpatterns = [
     url(r'^survey-success/$',
         views.survey_success,
         name='survey_success'
-        ),
+        )
+]
+
+""",
     url(r'^create/launch/$',
         views.create_launch_survey,
         name='create_launch_survey'
@@ -48,5 +51,4 @@ urlpatterns = [
         views.json_launch,
         name='json_launch'
         )
-]
-handler404 = 'survey.views.page_not_found'
+"""

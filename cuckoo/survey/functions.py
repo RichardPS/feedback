@@ -4,6 +4,8 @@ from .config import EMAIL_CONTACTS
 from datetime import datetime
 import pdb
 
+from .forms import FORM_TYPES
+
 def url_check(url):
     """ adds http to url if not present """
     PREFIX_STRING = "http://"
@@ -45,3 +47,6 @@ def convert_str_to_date(date_str):
     datetime_object = datetime.strptime(date_str, format_str)
 
     return datetime_object.date()
+
+def get_questions_form(form_type):
+    return FORM_TYPES[form_type]
