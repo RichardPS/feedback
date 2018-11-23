@@ -7,11 +7,7 @@ from .models import SupportSurvey
 from .models import SupportQuestions
 
 from .config import SUPPORT_LABELS
-
-
-from .config import SERVICE_LABEL
-from .config import SPEED_LABEL
-from .config import QUALITY_LABEL
+from .config import LAUNCH_LABELS
 from .config import QUESTION_OPTIONS
 
 
@@ -68,14 +64,22 @@ class LaunchOptionsForm(forms.Form):
     quality = forms.MultipleChoiceField(
             widget = forms.RadioSelect,
             choices=QUESTION_OPTIONS,
+            label=LAUNCH_LABELS['quality']
         )
     speed = forms.MultipleChoiceField(
             widget = forms.RadioSelect,
             choices=QUESTION_OPTIONS,
+            label=LAUNCH_LABELS['speed']
         )
     service = forms.MultipleChoiceField(
             widget = forms.RadioSelect,
             choices=QUESTION_OPTIONS,
+            label=LAUNCH_LABELS['service']
+        )
+    training = forms.MultipleChoiceField(
+            widget = forms.RadioSelect,
+            choices=QUESTION_OPTIONS,
+            label=LAUNCH_LABELS['training']
         )
 
 

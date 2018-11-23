@@ -27,24 +27,12 @@ SUPPORT_LABELS = {
     'service': 'Quality of Service',
 }
 
-QUALITY_LABEL = {
-	'support': 'Quality of Work',
-	'launch': 'Quality of Design',
-	'review': 'Quality of Review',
+LAUNCH_LABELS = {
+    'quality': 'Quality of Design',
+    'speed': 'Speed of Work',
+    'service': 'Production Customer Service',
+    'training': 'Quality of Training',
 }
-
-SPEED_LABEL = {
-	'support': 'Speed of Work',
-	'launch': 'Speed of Work',
-	'review': 'Speed of Review',
-}
-
-SERVICE_LABEL = {
-    'support': 'Support Customer Service',
-    'launch': 'Production Customer Service',
-    'review': 'Review Customer Service',
-}
-
 
 """ ERROR CODES """
 PAGE_NOT_FOUND = 404

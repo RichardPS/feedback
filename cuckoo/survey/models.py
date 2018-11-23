@@ -51,6 +51,7 @@ class LaunchQuestions(models.Model):
     quality = models.DecimalField(max_digits=5, decimal_places=2)
     speed = models.DecimalField(max_digits=5, decimal_places=2)
     service = models.DecimalField(max_digits=5, decimal_places=2)
+    training = models.DecimalField(max_digits=5, decimal_places=2)
     comment = models.TextField(blank=True)
     marketing = models.BooleanField(default=False)
     date_submitted = models.DateTimeField(auto_now_add=True)

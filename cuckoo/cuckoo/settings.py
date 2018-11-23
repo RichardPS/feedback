@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-from .site_config import USER, PASSWORD
+from .site_config import USER, PASSWORD, NAME
 
 import os
 
@@ -86,7 +86,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
+        'NAME': NAME,
         'USER': USER,
         'PASSWORD': PASSWORD,
         'HOST': 'localhost',

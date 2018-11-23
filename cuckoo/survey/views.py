@@ -2,13 +2,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.serializers import serialize
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, render_to_response
-from django.template import RequestContext
+from django.shortcuts import render, redirect
 
-import pdb
+# import pdb
 
 from .forms import LaunchSurveyForm
-from .forms import SupportOptionsForm
+# from .forms import SupportOptionsForm
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
 from .models import SupportSurvey
@@ -20,7 +19,7 @@ from .config import SUPPORT_INTRO_TEXT
 from .config import LAUNCH_INTRO_TEXT
 from .functions import convert_str_to_date
 from .functions import get_questions_form
-from .functions import quality_alert_check
+# from .functions import quality_alert_check
 from .functions import url_check
 
 
@@ -204,14 +203,13 @@ def complete_launch_survey(request, uuid):
     if request.method == 'POST':
         support_survey = LaunchSurvey.objects.get(uuid=uuid)
         feedback_form = SupportQuestionsForm(request.POST)
-        options_form = SupportOptionsForm(request.POST, survey_type='launch')
+        options_form = get_questions_form('launch')(request.POST)
         if feedback_form.is_valid():
             questions = feedback_form.save(commit=False)
 
     else:
         feedback_form = SupportQuestionsForm()
-        """ options_form = get_questions_form(survey_type='launch') """
-        options_form = SupportOptionsForm(survey_type='launch')
+        options_form = get_questions_form('launch')
 
 
     return render(
