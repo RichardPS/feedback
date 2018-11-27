@@ -10,6 +10,8 @@ from .forms import LaunchSurveyForm
 # from .forms import SupportOptionsForm
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
+from .models import LaunchSurvey
+from .models import LaunchQuestions
 from .models import SupportSurvey
 from .models import SupportQuestions
 
@@ -124,7 +126,7 @@ def survey_success(request):
 @login_required
 def view_support_surverys(request):
     """ admin view first surveys """
-    all_support_feedback = SupportQuestions.objects.all().distinct('support_survey')
+    all_support_feedback = SupportQuestions.objects.all().distinct('support_survey')  # noqa: E501
     return render(
         request,
         'survey/view-support-surverys.html',
@@ -206,11 +208,20 @@ def complete_launch_survey(request, uuid):
         options_form = get_questions_form('launch')(request.POST)
         if feedback_form.is_valid():
             questions = feedback_form.save(commit=False)
+            questions.launch_survey = support_survey
+            questions.quality = request.POST.get("quality")
+            questions.speed = request.POST.get("speed")
+            questions.service = request.POST.get("service")
+            questions.training = request.POST.get("training")
 
+            questions.save()
+            messages.success(request, "Success")
+            return redirect('/survey-success/')
+        else:
+            messages.error(request, "Invalid Data")
     else:
         feedback_form = SupportQuestionsForm()
         options_form = get_questions_form('launch')
-
 
     return render(
         request,
@@ -222,10 +233,11 @@ def complete_launch_survey(request, uuid):
         }
         )
 
+
 @login_required
 def view_launch_surverys(request):
     """ admin view first surveys """
-    all_launch_feedback = LaunchQuestions.objects.all().distinct('launch_survey')
+    all_launch_feedback = LaunchQuestions.objects.all().distinct('launch_survey')  # noqa: E501
     return render(
         request,
         'survey/view-launch-surverys.html',
