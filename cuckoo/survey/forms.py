@@ -30,6 +30,16 @@ class SupportQuestionsForm(ModelForm):
         }
 
 
+class LaunchQuestionsForm(ModelForm):
+    class Meta:
+        model = LaunchQuestions
+        fields = ['comment', 'marketing']
+        labels = {
+            'comment': ('Your Comments'),
+            'marketing': ('OK for marketing?')
+        }
+
+
 class LaunchSurveyForm(ModelForm):
     """ widget overrides """
     def __init__(self, *args, **kwargs):

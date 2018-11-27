@@ -4,12 +4,13 @@ from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-# import pdb
+import pdb
 
 from .forms import LaunchSurveyForm
-# from .forms import SupportOptionsForm
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
+from .forms import LaunchQuestionsForm
+
 from .models import LaunchSurvey
 from .models import LaunchQuestions
 from .models import SupportSurvey
@@ -203,12 +204,13 @@ def complete_launch_survey(request, uuid):
     intro_text = LAUNCH_INTRO_TEXT
 
     if request.method == 'POST':
-        support_survey = LaunchSurvey.objects.get(uuid=uuid)
-        feedback_form = SupportQuestionsForm(request.POST)
+        launch_survey = LaunchSurvey.objects.get(uuid=uuid)
+        feedback_form = LaunchQuestionsForm(request.POST)
         options_form = get_questions_form('launch')(request.POST)
         if feedback_form.is_valid():
             questions = feedback_form.save(commit=False)
-            questions.launch_survey = support_survey
+            pdb.set_trace()
+            questions.launch_survey = launch_survey
             questions.quality = request.POST.get("quality")
             questions.speed = request.POST.get("speed")
             questions.service = request.POST.get("service")
@@ -220,7 +222,7 @@ def complete_launch_survey(request, uuid):
         else:
             messages.error(request, "Invalid Data")
     else:
-        feedback_form = SupportQuestionsForm()
+        feedback_form = LaunchQuestionsForm()
         options_form = get_questions_form('launch')
 
     return render(
@@ -235,7 +237,7 @@ def complete_launch_survey(request, uuid):
 
 
 @login_required
-def view_launch_surverys(request):
+def view_launch_surveys(request):
     """ admin view first surveys """
     all_launch_feedback = LaunchQuestions.objects.all().distinct('launch_survey')  # noqa: E501
     return render(

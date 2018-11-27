@@ -35,10 +35,7 @@ urlpatterns = [
     url(r'^survey/launch/(?P<uuid>\S+)$',
         views.complete_launch_survey,
         name='complete_launch_survey'
-        )
-]
-
-""",
+        ),
     url(r'^admin/launch/$',
         views.view_launch_surveys,
         name='view_launch_surveys'
@@ -51,4 +48,4 @@ urlpatterns = [
         views.json_launch,
         name='json_launch'
         )
-"""
+]
