@@ -38,6 +38,7 @@ def page_not_found(request):
     return response
 
 
+# SUPPORT VIEWS
 @login_required
 def create_support_survey(request):
     """ create support survey form """
@@ -169,6 +170,7 @@ def json_support(request, startdate, enddate):
     return HttpResponse(json_data, content_type='application/json')
 
 
+# LAUNCH VIEWS
 @login_required
 def create_launch_survey(request):
     """ create launch survey """

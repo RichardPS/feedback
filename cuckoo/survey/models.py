@@ -4,6 +4,7 @@ from django.db import models
 import uuid
 
 
+# SUPPORT MODELS
 class SupportSurvey(models.Model):
     """ inital data required for survey """
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
@@ -34,6 +35,7 @@ class SupportQuestions(models.Model):
         return '{0}'.format(self.support_survey.domain)
 
 
+# LAUNCH MODELS
 class LaunchSurvey(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     domain = models.CharField(max_length=255)

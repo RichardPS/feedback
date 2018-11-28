@@ -42,3 +42,10 @@ body {
   color: #ed7983;
   font-size: 1.6rem;
 }
+
+
+.icon-404:before{
+  content:'\0045';
+  color: #ed7983;
+  font-size: 1.6rem;
+}

@@ -3,6 +3,7 @@ from django.conf.urls import url, handler404
 from . import views
 
 urlpatterns = [
+    # SUPPORT URLS
     url(
         r'^create/support/$',
         views.create_support_survey,
@@ -28,6 +29,7 @@ urlpatterns = [
         views.survey_success,
         name='survey_success'
         ),
+    # LAUNCH URLS
     url(r'^create/launch/$',
         views.create_launch_survey,
         name='create_launch_survey'
