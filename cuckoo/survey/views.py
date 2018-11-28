@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 import pdb
+from datetime import date
 
 from .forms import LaunchSurveyForm
 from .forms import SupportSurveyForm
@@ -22,6 +23,7 @@ from .config import SUPPORT_INTRO_TEXT
 from .config import LAUNCH_INTRO_TEXT
 from .functions import convert_str_to_date
 from .functions import get_questions_form
+from .functions import get_launch_delta
 # from .functions import quality_alert_check
 from .functions import url_check
 
@@ -175,9 +177,12 @@ def create_launch_survey(request):
         if create_launch_survey_form.is_valid():
             survey = create_launch_survey_form.save(commit=False)
             survey.domain = url_check(request.POST.get("domain"))
-
+            delta = get_launch_delta(
+                request.POST.get("ordered"),
+                request.POST.get("launched")
+                )
+            survey.time_to_launch = delta
             survey.save()
-
             messages.success(request, "Success")
             messages.info(request, "{0}/survey/launch/{1}".format(
                 request.META['HTTP_HOST'],
@@ -209,7 +214,6 @@ def complete_launch_survey(request, uuid):
         options_form = get_questions_form('launch')(request.POST)
         if feedback_form.is_valid():
             questions = feedback_form.save(commit=False)
-            pdb.set_trace()
             questions.launch_survey = launch_survey
             questions.quality = request.POST.get("quality")
             questions.speed = request.POST.get("speed")

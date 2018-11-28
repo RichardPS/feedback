@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 from .config import EMAIL_CONTACTS
 
+from datetime import date
 from datetime import datetime
 import pdb
 
@@ -47,6 +48,15 @@ def convert_str_to_date(date_str):
     datetime_object = datetime.strptime(date_str, format_str)
 
     return datetime_object.date()
+
+
+def get_launch_delta(startdate, enddate):
+    startdate = convert_str_to_date(startdate)
+    enddate = convert_str_to_date(enddate)
+    delta = enddate - startdate
+
+    return delta
+
 
 def get_questions_form(form_type):
     return FORM_TYPES[form_type]

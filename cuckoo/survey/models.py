@@ -41,6 +41,7 @@ class LaunchSurvey(models.Model):
     sales = models.CharField(max_length=255)
     ordered = models.DateField(auto_now_add=False, auto_now=False, blank=False)
     launched = models.DateField(auto_now_add=False, auto_now=False, blank=False)
+    time_to_launch = models.DurationField()
 
     def __str__(self):
         return '{0}'.format(self.domain)
