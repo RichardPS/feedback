@@ -5,7 +5,6 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 import pdb
-from datetime import date
 
 from .forms import LaunchSurveyForm
 from .forms import SupportSurveyForm
@@ -21,6 +20,7 @@ from .config import FEEDBACK_THANKYOU_MESSAGE
 from .config import PAGE_NOT_FOUND
 from .config import SUPPORT_INTRO_TEXT
 from .config import LAUNCH_INTRO_TEXT
+
 from .functions import convert_str_to_date
 from .functions import get_questions_form
 from .functions import get_launch_delta

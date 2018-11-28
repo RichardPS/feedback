@@ -1,6 +1,7 @@
 from django import forms
-from django.forms import ModelForm, SelectDateWidget
+from django.forms import ModelForm
 from django.forms.widgets import TextInput
+
 from .models import LaunchSurvey
 from .models import LaunchQuestions
 from .models import SupportSurvey
@@ -13,6 +14,7 @@ from .config import QUESTION_OPTIONS
 
 class MyDateInput(TextInput):
     input_type = 'date'
+
 
 class SupportSurveyForm(ModelForm):
     class Meta:
@@ -44,8 +46,8 @@ class LaunchSurveyForm(ModelForm):
     """ widget overrides """
     def __init__(self, *args, **kwargs):
         super(LaunchSurveyForm, self).__init__(*args, **kwargs)
-        self.fields['ordered'].widget = MyDateInput(attrs={'class':'date'})
-        self.fields['launched'].widget = MyDateInput(attrs={'class':'date'})
+        self.fields['ordered'].widget = MyDateInput(attrs={'class': 'date'})
+        self.fields['launched'].widget = MyDateInput(attrs={'class': 'date'})
 
     class Meta:
         model = LaunchSurvey
@@ -54,17 +56,17 @@ class LaunchSurveyForm(ModelForm):
 
 class SupportOptionsForm(forms.Form):
     quality = forms.MultipleChoiceField(
-            widget = forms.RadioSelect,
+            widget=forms.RadioSelect,
             choices=QUESTION_OPTIONS,
             label=SUPPORT_LABELS['quality']
         )
     speed = forms.MultipleChoiceField(
-            widget = forms.RadioSelect,
+            widget=forms.RadioSelect,
             choices=QUESTION_OPTIONS,
             label=SUPPORT_LABELS['speed']
         )
     service = forms.MultipleChoiceField(
-            widget = forms.RadioSelect,
+            widget=forms.RadioSelect,
             choices=QUESTION_OPTIONS,
             label=SUPPORT_LABELS['service']
         )
@@ -72,22 +74,22 @@ class SupportOptionsForm(forms.Form):
 
 class LaunchOptionsForm(forms.Form):
     quality = forms.MultipleChoiceField(
-            widget = forms.RadioSelect,
+            widget=forms.RadioSelect,
             choices=QUESTION_OPTIONS,
             label=LAUNCH_LABELS['quality']
         )
     speed = forms.MultipleChoiceField(
-            widget = forms.RadioSelect,
+            widget=forms.RadioSelect,
             choices=QUESTION_OPTIONS,
             label=LAUNCH_LABELS['speed']
         )
     service = forms.MultipleChoiceField(
-            widget = forms.RadioSelect,
+            widget=forms.RadioSelect,
             choices=QUESTION_OPTIONS,
             label=LAUNCH_LABELS['service']
         )
     training = forms.MultipleChoiceField(
-            widget = forms.RadioSelect,
+            widget=forms.RadioSelect,
             choices=QUESTION_OPTIONS,
             label=LAUNCH_LABELS['training']
         )

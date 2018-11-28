@@ -7,6 +7,7 @@ import pdb
 
 from .forms import FORM_TYPES
 
+
 def url_check(url):
     """ adds http to url if not present """
     PREFIX_STRING = "http://"

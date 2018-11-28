@@ -3,7 +3,7 @@ from django.db import models
 
 import uuid
 
-# Create your models here.
+
 class SupportSurvey(models.Model):
     """ inital data required for survey """
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
@@ -39,8 +39,16 @@ class LaunchSurvey(models.Model):
     domain = models.CharField(max_length=255)
     advisor = models.CharField(max_length=255)
     sales = models.CharField(max_length=255)
-    ordered = models.DateField(auto_now_add=False, auto_now=False, blank=False)
-    launched = models.DateField(auto_now_add=False, auto_now=False, blank=False)
+    ordered = models.DateField(
+        auto_now_add=False,
+        auto_now=False,
+        blank=False
+        )
+    launched = models.DateField(
+        auto_now_add=False,
+        auto_now=False,
+        blank=False
+        )
     time_to_launch = models.DurationField()
 
     def __str__(self):
