@@ -6,7 +6,7 @@ import uuid
 
 # SUPPORT MODELS
 class SupportSurvey(models.Model):
-    """ inital data required for survey """
+    """ inital data for support survey """
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     domain = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
@@ -22,7 +22,7 @@ class SupportSurvey(models.Model):
 
 
 class SupportQuestions(models.Model):
-    """ Questions for support servey """
+    """ questions for support survey """
     support_survey = models.ForeignKey(SupportSurvey, on_delete=models.CASCADE)
     quality = models.DecimalField(max_digits=5, decimal_places=2)
     speed = models.DecimalField(max_digits=5, decimal_places=2)
@@ -37,6 +37,7 @@ class SupportQuestions(models.Model):
 
 # LAUNCH MODELS
 class LaunchSurvey(models.Model):
+    """ inital data for launch survey """
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     domain = models.CharField(max_length=255)
     advisor = models.CharField(max_length=255)
@@ -58,6 +59,7 @@ class LaunchSurvey(models.Model):
 
 
 class LaunchQuestions(models.Model):
+    """ questions for launch survey """
     launch_survey = models.ForeignKey(LaunchSurvey, on_delete=models.CASCADE)
     quality = models.DecimalField(max_digits=5, decimal_places=2)
     speed = models.DecimalField(max_digits=5, decimal_places=2)

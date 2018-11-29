@@ -19,7 +19,6 @@
         <form class="create_survey_form" method="POST">
             {% csrf_token %}
             {{ create_support_survey_form.as_ul }}
-            <li>Regarding: <input type="text" name="regarding" required></li>
             <input type="submit" value="Create">
         </form>
     </section>

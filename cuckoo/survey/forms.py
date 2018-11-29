@@ -16,10 +16,43 @@ class MyDateInput(TextInput):
     input_type = 'date'
 
 
-class SupportSurveyForm(ModelForm):
-    class Meta:
-        model = SupportSurvey
-        fields = ['domain']
+class SupportSurveyForm(forms.Form):
+    domain = forms.CharField()
+    regarding = forms.CharField()
+
+    _model = SupportSurvey
+
+    def __init__(self, *args, **kwargs):
+        self._data = {}
+        super(SupportSurveyForm, self).__init__(*args, **kwargs)
+
+    def clean_regarding(self):
+        data = self.cleaned_data['regarding']
+        regarding = data.split(',')
+        if not len(regarding) == 7:
+            raise forms.ValidationError('Incorrect number of regarding parameters')
+
+        self._data['price'] = regarding[0]
+        self._data['details'] = regarding[1]
+        self._data['completed_by'] = regarding[2]
+        self._data['time'] = regarding[3]
+        self._data['checked_by'] = regarding[4]
+        self._data['set_up_by'] = regarding[5]
+
+        return data
+
+    def clean_domain(self):
+        data = self.cleaned_data['domain']
+        self._data['domain'] = url_check(data)
+
+        return data
+
+    def save(self, commit=True):
+        instance = self._model(**self._data)
+        if commit:
+            instance.save()
+
+        return instance
 
 
 class SupportQuestionsForm(ModelForm):
@@ -99,3 +132,14 @@ FORM_TYPES = {
     'support': SupportOptionsForm,
     'launch': LaunchOptionsForm,
 }
+
+
+def url_check(url):
+    """ adds http to url if not present """
+    PREFIX_STRING = "http://"
+    start_of_url = url[0:4]
+
+    if start_of_url != "http":
+        url = PREFIX_STRING + url
+
+    return url

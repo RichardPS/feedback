@@ -8,17 +8,6 @@ import pdb
 from .forms import FORM_TYPES
 
 
-def url_check(url):
-    """ adds http to url if not present """
-    PREFIX_STRING = "http://"
-    start_of_url = url[0:4]
-
-    if start_of_url != "http":
-        url = PREFIX_STRING + url
-
-    return url
-
-
 def quality_alert_check(school_domain, school_scores, department):
     """ check is scores are low """
     for score in school_scores:

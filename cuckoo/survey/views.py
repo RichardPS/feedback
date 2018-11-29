@@ -25,7 +25,6 @@ from .functions import convert_str_to_date
 from .functions import get_questions_form
 from .functions import get_launch_delta
 # from .functions import quality_alert_check
-from .functions import url_check
 
 
 # Create your views here.
@@ -45,20 +44,10 @@ def create_support_survey(request):
     page_name = "Create Support Survey"
     if request.method == 'POST':
         create_support_survey_form = SupportSurveyForm(request.POST)
-        regarding = request.POST.get("regarding").split(",")
 
-        if create_support_survey_form.is_valid() and len(regarding) == 7:
+        if create_support_survey_form.is_valid():
 
-            survey = create_support_survey_form.save(commit=False)
-            survey.domain = url_check(request.POST.get("domain"))
-            survey.price = regarding[0]
-            survey.details = regarding[1]
-            survey.completed_by = regarding[2]
-            survey.time = regarding[3]
-            survey.checked_by = regarding[4]
-            survey.set_up_by = regarding[5]
-
-            survey.save()
+            survey = create_support_survey_form.save()
 
             messages.success(request, "Success")
             messages.info(request, "{0}/survey/support/{1}".format(
