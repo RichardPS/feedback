@@ -4,7 +4,7 @@ from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-import pdb
+import pdb  # noqa: F401
 
 from .forms import LaunchSurveyForm
 from .forms import SupportSurveyForm
@@ -40,7 +40,9 @@ def page_not_found(request):
 
 # SUPPORT VIEWS
 @login_required
-def create_support_survey(request):
+def create_support_survey(
+        request,
+        template_name='survey/create_support_survey.html'):
     """ create support survey form """
     page_name = "Create Support Survey"
     if request.method == 'POST':
@@ -61,17 +63,22 @@ def create_support_survey(request):
             messages.error(request, "Invalid Data")
     else:
         create_support_survey_form = SupportSurveyForm()
+
+    context = {
+        'page_name': page_name,
+        'create_support_survey_form': create_support_survey_form,
+        }
     return render(
         request,
-        'survey/create_support_survey.html',
-        {
-            'page_name': page_name,
-            'create_support_survey_form': create_support_survey_form,
-        }
+        template_name,
+        context
         )
 
 
-def complete_support_survey(request, uuid):
+def complete_support_survey(
+        request,
+        uuid,
+        template_name='survey/feedback_form.html'):
     """ create feedback form """
     intro_text = SUPPORT_INTRO_TEXT
     if request.method == 'POST':
@@ -94,56 +101,73 @@ def complete_support_survey(request, uuid):
     else:
         feedback_form = SupportQuestionsForm()
         options_form = get_questions_form('support')
+
+    context = {
+        'intro_text': intro_text,
+        'feedback_form': feedback_form,
+        'options_form': options_form
+        }
     return render(
         request,
-        'survey/feedback_form.html',
-        {
-            'intro_text': intro_text,
-            'feedback_form': feedback_form,
-            'options_form': options_form
-        }
+        template_name,
+        context
         )
 
 
-def survey_success(request):
+def survey_success(
+        request,
+        template_name='survey/survey-success.html'):
     """ survey succes page """
     feedback_thankyou_message = FEEDBACK_THANKYOU_MESSAGE
+
+    context = {
+        'feedback_thankyou_message': feedback_thankyou_message,
+        }
     return render(
         request,
-        'survey/survey-success.html',
-        {
-            'feedback_thankyou_message': feedback_thankyou_message,
-        }
+        template_name,
+        context
         )
 
 
 @login_required
-def view_support_surverys(request):
+def view_support_surverys(
+        request,
+        template_name='survey/view-support-surverys.html'):
     """ admin view first surveys """
     all_support_feedback = SupportQuestions.objects.all().distinct('support_survey')  # noqa: E501
+
+    context = {
+        'all_support_feedback': all_support_feedback
+    }
     return render(
         request,
-        'survey/view-support-surverys.html',
-        {
-            'all_support_feedback': all_support_feedback
-        }
+        template_name,
+        context
         )
 
 
 @login_required
-def view_all_support_surveys(request):
+def view_all_support_surveys(
+        request,
+        template_name='survey/view-support-surverys.html'):
     """ admin view all surveys """
     all_support_feedback = SupportQuestions.objects.all()
+
+    context = {
+        'all_support_feedback': all_support_feedback
+        }
     return render(
         request,
-        'survey/view-support-surverys.html',
-        {
-            'all_support_feedback': all_support_feedback
-        }
+        template_name,
+        context
         )
 
 
-def json_support(request, startdate, enddate):
+def json_support(
+        request,
+        startdate,
+        enddate):
     """ admin view first surveys as json """
     startdate = convert_str_to_date(startdate)
     enddate = convert_str_to_date(enddate)
@@ -162,7 +186,8 @@ def json_support(request, startdate, enddate):
 
 # LAUNCH VIEWS
 @login_required
-def create_launch_survey(request):
+def create_launch_survey(
+        request):
     """ create launch survey """
     if request.method == 'POST':
         create_launch_survey_form = LaunchSurveyForm(request.POST)
@@ -196,7 +221,9 @@ def create_launch_survey(request):
         )
 
 
-def complete_launch_survey(request, uuid):
+def complete_launch_survey(
+        request,
+        uuid):
     """ create feedback form """
     intro_text = LAUNCH_INTRO_TEXT
 
@@ -233,36 +260,47 @@ def complete_launch_survey(request, uuid):
 
 
 @login_required
-def view_launch_surveys(request):
+def view_launch_surveys(
+        request,
+        template_name='survey/view-launch-surverys.html'):
     """ admin view first surveys """
     all_launch_feedback = LaunchQuestions.objects.all().distinct('launch_survey')  # noqa: E501
     view_all = False
+
+    context = {
+        'all_launch_feedback': all_launch_feedback,
+        'view_all': view_all
+        }
     return render(
         request,
-        'survey/view-launch-surverys.html',
-        {
-            'all_launch_feedback': all_launch_feedback,
-            'view_all': view_all
-        }
+        template_name,
+        context
         )
 
 
 @login_required
-def view_all_launch_surveys(request):
+def view_all_launch_surveys(
+        request,
+        template_name='survey/view-launch-surverys.html'):
     """ admin view all surveys """
     all_launch_feedback = LaunchQuestions.objects.all()
     view_all = True
+
+    context = {
+        'all_launch_feedback': all_launch_feedback,
+        'view_all': view_all
+        }
     return render(
         request,
-        'survey/view-launch-surverys.html',
-        {
-            'all_launch_feedback': all_launch_feedback,
-            'view_all': view_all
-        }
+        template_name,
+        context
         )
 
 
-def json_launch(request, startdate, enddate):
+def json_launch(
+        request,
+        startdate,
+        enddate):
     """ admin view first surveys as json """
     startdate = convert_str_to_date(startdate)
     enddate = convert_str_to_date(enddate)

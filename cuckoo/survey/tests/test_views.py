@@ -113,7 +113,7 @@ def func_none(data):
     return None, SupportSurveyForm()
 
 def func_false(data):
-    return Flase, SupportSurveyForm()
+    return False, SupportSurveyForm()
 
 def func_true(data):
     instance = SimpleObject()
