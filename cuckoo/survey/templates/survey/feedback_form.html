@@ -1,4 +1,5 @@
 {% extends "survey/template.html" %}
+{% load staticfiles %}
 
 {% block styles %}{% endblock styles %}
 
@@ -20,7 +21,7 @@
     <section class="intro-text">
         {{ intro_text |safe }}
     </section>
-    
+
     <section class="support_feedback">
         <form class="feedback_form" method="POST">
             {% csrf_token %}

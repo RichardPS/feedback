@@ -10,6 +10,7 @@ from .forms import LaunchSurveyForm
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
 from .forms import LaunchQuestionsForm
+from .forms import url_check
 
 from .models import LaunchSurvey
 from .models import LaunchQuestions
@@ -235,11 +236,13 @@ def complete_launch_survey(request, uuid):
 def view_launch_surveys(request):
     """ admin view first surveys """
     all_launch_feedback = LaunchQuestions.objects.all().distinct('launch_survey')  # noqa: E501
+    view_all = False
     return render(
         request,
         'survey/view-launch-surverys.html',
         {
-            'all_launch_feedback': all_launch_feedback
+            'all_launch_feedback': all_launch_feedback,
+            'view_all': view_all
         }
         )
 
@@ -248,11 +251,13 @@ def view_launch_surveys(request):
 def view_all_launch_surveys(request):
     """ admin view all surveys """
     all_launch_feedback = LaunchQuestions.objects.all()
+    view_all = True
     return render(
         request,
         'survey/view-launch-surverys.html',
         {
-            'all_launch_feedback': all_launch_feedback
+            'all_launch_feedback': all_launch_feedback,
+            'view_all': view_all
         }
         )
 

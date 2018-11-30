@@ -1,7 +1,56 @@
 {% extends "survey/template.html" %}
+{% load staticfiles %}
 
 {% block styles %}{% endblock styles %}
 
-{% block content %}{% endblock content %}
+{% block content %}
 
-{% block scripts %}{% endblock scripts %}
+    {% if view_all %}
+        <a href="/admin/launch/" id="switchview">View Unique</a>
+    {% else %}
+        <a href="/admin/all-launch/" id="switchview">View All</a>
+    {% endif %}
+
+    <a id="geoffmode">Geoff Mode</a>
+    <table border="1" cellpadding="4" cellspacing="0">
+        <tr>
+            <th>Date</th>
+            <th>School</th>
+            <th class="showme">Launch</th>
+            <th class="showme">Customer Services</th>
+            <th class="showme">Sales Advisor</th>
+            <th class="showme">Date Ordered</th>
+            <th class="showme">date Launched</th>
+            <th class="showme">Trunaround Days</th>
+            <th class="showme">Design Rating</th>
+            <th class="showme">Time Rating</th>
+            <th class="showme">CS Rating</th>
+            <th class="showme">Training Rating</th>
+            <th>Comments</th>
+            <th class="showme">OK For Marketing?</th>
+        </tr>
+    {% for survey in all_launch_feedback %}
+        <tr>
+            <td>{{ survey.date_submitted }}</td>
+            <td><a href="{{ survey.launch_survey.domain }}" target="_blank">{{ survey.launch_survey.domain }}</a></td>
+            <td class="showme">{{ survey.launch_survey.uuid }}</td>
+            <td class="showme">{{ survey.launch_survey.advisor }}</td>
+            <td class="showme">{{ survey.launch_survey.sales }}</td>
+            <td class="showme">{{ survey.launch_survey.ordered }}</td>
+            <td class="showme">{{ survey.launch_survey.launched }}</td>
+            <td class="showme">{{ survey.launch_survey.time_to_launch.days }}</td>
+            <td class="showme">{{ survey.quality }}</td>
+            <td class="showme">{{ survey.speed }}</td>
+            <td class="showme">{{ survey.service }}</td>
+            <td class="showme">{{ survey.training }}</td>
+            <td>{{ survey.comment }}</td>
+            <td class="showme">{{ survey.marketing }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script type='text/javascript' src='{% static "js/geoff-mode.js" %}'></script>
+{% endblock scripts %}

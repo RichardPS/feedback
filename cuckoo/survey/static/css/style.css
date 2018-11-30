@@ -49,3 +49,40 @@ body {
   color: #ed7983;
   font-size: 1.6rem;
 }
+
+ #switchview {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  background: #469AE2;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+}
+
+#switchview:focus, #switchview:hover {
+  cursor: pointer;
+}
+
+/* GEOFF MODE
+============= */
+#geoffmode {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  background: #469AE2;
+  border-radius: 5px;
+  color: #fff;
+}
+
+#geoffmode:focus, #geoffmode:hover {
+  cursor: pointer;
+}
+
+.showme {
+  display: table-cell;
+}
+
+.hideme {
+  display: none;
+}
