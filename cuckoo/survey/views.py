@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 import pdb  # noqa: F401
 
 from .forms import LaunchSurveyForm
+from .forms import LaunchSurveyFormTest
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
 from .forms import LaunchQuestionsForm
@@ -24,7 +25,6 @@ from .config import LAUNCH_INTRO_TEXT
 
 from .functions import convert_str_to_date
 from .functions import get_questions_form
-from .functions import get_launch_delta
 # from .functions import quality_alert_check
 
 
@@ -184,14 +184,14 @@ def json_support(
     return HttpResponse(json_data, content_type='application/json')
 
 
-# LAUNCH VIEWS
 @login_required
 def create_launch_survey(
         request):
     """ create launch survey """
     if request.method == 'POST':
-        create_launch_survey_form = LaunchSurveyForm(request.POST)
+        create_launch_survey_form = LaunchSurveyFormTest(request.POST)
         if create_launch_survey_form.is_valid():
+            """
             survey = create_launch_survey_form.save(commit=False)
             survey.domain = url_check(request.POST.get("domain"))
             delta = get_launch_delta(
@@ -199,7 +199,10 @@ def create_launch_survey(
                 request.POST.get("launched")
                 )
             survey.time_to_launch = delta
-            survey.save()
+            """
+            pdb.set_trace()
+            create_launch_survey_form.save()
+
             messages.success(request, "Success")
             messages.info(request, "{0}/survey/launch/{1}".format(
                 request.META['HTTP_HOST'],
@@ -210,7 +213,7 @@ def create_launch_survey(
         else:
             messages.error(request, "Invalid Data")
     else:
-        create_launch_survey_form = LaunchSurveyForm()
+        create_launch_survey_form = LaunchSurveyFormTest()
 
     return render(
         request,

@@ -17,8 +17,8 @@ class MyDateInput(TextInput):
 
 
 class SupportSurveyForm(forms.Form):
-    domain = forms.CharField()
-    regarding = forms.CharField()
+    domain = forms.CharField(max_length=255)
+    regarding = forms.CharField(max_length=255)
 
     _model = SupportSurvey
 
@@ -87,6 +87,60 @@ class LaunchSurveyForm(ModelForm):
         fields = ['domain', 'advisor', 'sales', 'ordered', 'launched']
 
 
+class LaunchSurveyFormTest(forms.Form):
+    domain = forms.CharField(max_length=255)
+    advisor = forms.CharField(max_length=255)
+    sales = forms.CharField(max_length=255)
+    ordered = forms.DateField()
+    launched = forms.DateField()
+
+    _model = LaunchSurvey
+
+    def __init__(self, *args, **kwargs):
+        self._data = {}
+        super(LaunchSurveyFormTest, self).__init__(*args, **kwargs)
+        self.fields['ordered'].widget = MyDateInput(attrs={'class': 'date'})
+        self.fields['launched'].widget = MyDateInput(attrs={'class': 'date'})
+
+    def clean_domain(self):
+        data = self.cleaned_data['domain']
+        self._data['domain'] = url_check(data)
+        return data
+
+    def clean_advisor(self):
+        data = self.cleaned_data['advisor']
+        self._data['advisor'] = data
+        return data
+
+    def clean_sales(self):
+        data = self.cleaned_data['sales']
+        self._data['sales'] = data
+        return data
+
+    def clean_ordered(self):
+        data = self.cleaned_data['ordered']
+        self._data['ordered'] = data
+        return data
+
+    def clean_launched(self):
+        data = self.cleaned_data['launched']
+        self._data['launched'] = data
+        return data
+
+    def clean_time_to_launch(self):
+        start = self.cleaned_data['ordered']
+        end = self.cleaned_data['launched']
+        data = get_launch_delta(start, end)
+        self._data['time_to_launch'] = data
+        return data
+
+    def save(self, commit=True):
+        instance = self._model(**self._data)
+        if commit:
+            instance.save()
+        return instance
+
+
 class SupportOptionsForm(forms.Form):
     quality = forms.MultipleChoiceField(
             widget=forms.RadioSelect,
@@ -143,3 +197,11 @@ def url_check(url):
         url = PREFIX_STRING + url
 
     return url
+
+
+def get_launch_delta(startdate, enddate):
+    startdate = convert_str_to_date(startdate)
+    enddate = convert_str_to_date(enddate)
+    delta = enddate - startdate
+
+    return delta

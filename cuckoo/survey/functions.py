@@ -40,13 +40,5 @@ def convert_str_to_date(date_str):
     return datetime_object.date()
 
 
-def get_launch_delta(startdate, enddate):
-    startdate = convert_str_to_date(startdate)
-    enddate = convert_str_to_date(enddate)
-    delta = enddate - startdate
-
-    return delta
-
-
 def get_questions_form(form_type):
     return FORM_TYPES[form_type]
