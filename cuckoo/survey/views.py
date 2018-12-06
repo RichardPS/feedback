@@ -10,7 +10,6 @@ from .forms import LaunchSurveyForm
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
 from .forms import LaunchQuestionsForm
-from .forms import url_check
 
 from .models import LaunchSurvey
 from .models import LaunchQuestions
@@ -186,7 +185,7 @@ def json_support(
 
 @login_required
 def create_launch_survey(
-        request
+        request,
         template_name='survey/create_launch_survey.html'):
     """ create launch survey """
     if request.method == 'POST':

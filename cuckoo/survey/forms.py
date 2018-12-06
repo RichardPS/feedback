@@ -2,8 +2,6 @@ from django import forms
 from django.forms import ModelForm
 from django.forms.widgets import TextInput
 
-from datetime import datetime
-
 from .models import LaunchSurvey
 from .models import LaunchQuestions
 from .models import SupportSurvey
@@ -32,7 +30,8 @@ class SupportSurveyForm(forms.Form):
         data = self.cleaned_data['regarding']
         regarding = data.split(',')
         if not len(regarding) == 7:
-            raise forms.ValidationError('Incorrect number of regarding parameters')
+            raise forms.ValidationError(
+                'Incorrect number of regarding parameters')
 
         self._data['price'] = regarding[0]
         self._data['details'] = regarding[1]
@@ -88,7 +87,7 @@ class LaunchSurveyForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self._data = {}
-        super(LaunchSurveyFormTest, self).__init__(*args, **kwargs)
+        super(LaunchSurveyForm, self).__init__(*args, **kwargs)
         self.fields['ordered'].widget = MyDateInput(attrs={'class': 'date'})
         self.fields['launched'].widget = MyDateInput(attrs={'class': 'date'})
 
