@@ -1,9 +1,12 @@
 from django.shortcuts import render
+from django.test import RequestFactory
 
 from survey.functions import convert_str_to_date
-from survey.functions import get_launch_delta
 
+from survey.forms import get_launch_delta
 from survey.forms import SupportSurveyForm
+
+from survey.models import SupportSurvey
 
 from survey.views import survey_success
 from survey.views import complete_support_survey
@@ -14,6 +17,7 @@ from survey.config import FEEDBACK_THANKYOU_MESSAGE
 from survey.config import SUPPORT_INTRO_TEXT
 
 import datetime
+import pytest
 import uuid
 
 HTTP_OK = 200
@@ -40,10 +44,11 @@ def test_convert_str_to_date():
 
 
 def test_get_launch_delta():
-    test_start_str_date = '2018-01-01'
-    test_end_str_date = '2018-01-31'
-    delta_result = get_launch_delta(test_start_str_date, test_end_str_date)
-    assert isinstance(delta_result, datetime.timedelta)
+    expected_delta = datetime.timedelta(days=3)
+    test_start_date = datetime.date.today()
+    test_end_date = test_start_date + expected_delta
+    delta_result = get_launch_delta(test_start_date, test_end_date)
+    assert delta_result == expected_delta
 
 
 # ----------------------------
@@ -74,7 +79,7 @@ def _create_support_survey(data=None, form_class=SupportSurveyForm):
     if form.is_valid():
         survey = form.save()
         return True, survey
-    return Flase, form
+    return False, form
 
 
 def create_support_survey(
@@ -121,8 +126,36 @@ def func_true(data):
     return True, instance
 
 def test_form_default():
-    request = SimpleObject()
-    request.POST = {}
-
+    request = RequestFactory().get('/')
     response = create_support_survey(request, formhandler=func_none)
-    assert False, response
+    assert response.status_code == HTTP_OK
+
+def test_formhandler_empty():
+    post = {}
+    form_class = SupportSurveyForm
+    status, response = _create_support_survey(post)
+    assert status is None
+    assert response.is_bound is False
+    assert isinstance(response, form_class)
+
+def test_formhandler_fail():
+    post = {
+        'domain': '',
+        'regarding': ''
+    }
+    form_class = SupportSurveyForm
+    status, response = _create_support_survey(post)
+    assert status is False
+    assert response.is_bound is True
+    assert isinstance(response, form_class)
+
+@pytest.mark.django_db
+def test_formhandler_success():
+    post = {
+        'domain': 'www.domain.com',
+        'regarding': '£0, details, RW, 10, PS, KH, 0'
+    }
+    form_class = SupportSurveyForm
+    status, response = _create_support_survey(post)
+    assert status is True
+    assert isinstance(response, SupportSurvey)

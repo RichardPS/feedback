@@ -7,7 +7,6 @@ from django.shortcuts import render, redirect
 import pdb  # noqa: F401
 
 from .forms import LaunchSurveyForm
-from .forms import LaunchSurveyFormTest
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
 from .forms import LaunchQuestionsForm
@@ -135,7 +134,8 @@ def view_support_surverys(
         request,
         template_name='survey/view-support-surverys.html'):
     """ admin view first surveys """
-    all_support_feedback = SupportQuestions.objects.all().distinct('support_survey')  # noqa: E501
+    all_support_feedback = SupportQuestions.objects.all()
+    all_support_feedback = all_support_feedback.distinct('support_survey')
 
     context = {
         'all_support_feedback': all_support_feedback
@@ -186,22 +186,13 @@ def json_support(
 
 @login_required
 def create_launch_survey(
-        request):
+        request
+        template_name='survey/create_launch_survey.html'):
     """ create launch survey """
     if request.method == 'POST':
-        create_launch_survey_form = LaunchSurveyFormTest(request.POST)
+        create_launch_survey_form = LaunchSurveyForm(request.POST)
         if create_launch_survey_form.is_valid():
-            """
-            survey = create_launch_survey_form.save(commit=False)
-            survey.domain = url_check(request.POST.get("domain"))
-            delta = get_launch_delta(
-                request.POST.get("ordered"),
-                request.POST.get("launched")
-                )
-            survey.time_to_launch = delta
-            """
-            pdb.set_trace()
-            create_launch_survey_form.save()
+            survey = create_launch_survey_form.save()
 
             messages.success(request, "Success")
             messages.info(request, "{0}/survey/launch/{1}".format(
@@ -213,14 +204,14 @@ def create_launch_survey(
         else:
             messages.error(request, "Invalid Data")
     else:
-        create_launch_survey_form = LaunchSurveyFormTest()
+        create_launch_survey_form = LaunchSurveyForm()
+
+    context = {'create_launch_survey_form': create_launch_survey_form}
 
     return render(
         request,
-        'survey/create_launch_survey.html',
-        {
-            'create_launch_survey_form': create_launch_survey_form
-        }
+        template_name,
+        context
         )
 
 
@@ -267,7 +258,8 @@ def view_launch_surveys(
         request,
         template_name='survey/view-launch-surverys.html'):
     """ admin view first surveys """
-    all_launch_feedback = LaunchQuestions.objects.all().distinct('launch_survey')  # noqa: E501
+    all_launch_feedback = LaunchQuestions.objects.all()
+    all_launch_feedback = all_launch_feedback.distinct('launch_survey')
     view_all = False
 
     context = {

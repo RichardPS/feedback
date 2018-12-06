@@ -2,6 +2,8 @@ from django import forms
 from django.forms import ModelForm
 from django.forms.widgets import TextInput
 
+from datetime import datetime
+
 from .models import LaunchSurvey
 from .models import LaunchQuestions
 from .models import SupportSurvey
@@ -75,19 +77,7 @@ class LaunchQuestionsForm(ModelForm):
         }
 
 
-class LaunchSurveyForm(ModelForm):
-    """ widget overrides """
-    def __init__(self, *args, **kwargs):
-        super(LaunchSurveyForm, self).__init__(*args, **kwargs)
-        self.fields['ordered'].widget = MyDateInput(attrs={'class': 'date'})
-        self.fields['launched'].widget = MyDateInput(attrs={'class': 'date'})
-
-    class Meta:
-        model = LaunchSurvey
-        fields = ['domain', 'advisor', 'sales', 'ordered', 'launched']
-
-
-class LaunchSurveyFormTest(forms.Form):
+class LaunchSurveyForm(forms.Form):
     domain = forms.CharField(max_length=255)
     advisor = forms.CharField(max_length=255)
     sales = forms.CharField(max_length=255)
@@ -127,12 +117,12 @@ class LaunchSurveyFormTest(forms.Form):
         self._data['launched'] = data
         return data
 
-    def clean_time_to_launch(self):
+    def clean(self):
         start = self.cleaned_data['ordered']
         end = self.cleaned_data['launched']
         data = get_launch_delta(start, end)
         self._data['time_to_launch'] = data
-        return data
+        return self.cleaned_data
 
     def save(self, commit=True):
         instance = self._model(**self._data)
@@ -200,8 +190,6 @@ def url_check(url):
 
 
 def get_launch_delta(startdate, enddate):
-    startdate = convert_str_to_date(startdate)
-    enddate = convert_str_to_date(enddate)
     delta = enddate - startdate
 
     return delta
