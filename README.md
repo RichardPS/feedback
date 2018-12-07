@@ -14,9 +14,21 @@ sudo apt-get install virtualenv
 
 virtualenv -p python3 dev
 
+## Get repo and setup env
+
+source dev/bin/activate
+
+cd dev
+
+git clone https://github.com/RichardPS/jessica.git
+
 ## Install env requirements
 
 pip install -r requirements.txt
+
+## Add DB config
+
+feedback/cuckoo/cuckoo/site_config.py
 
 ## Requirments
 
