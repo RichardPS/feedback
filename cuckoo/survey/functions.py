@@ -1,9 +1,8 @@
 from django.core.mail import send_mail
 from .config import EMAIL_CONTACTS
 
-from datetime import date
 from datetime import datetime
-import pdb
+import pdb  # noqa: F401
 
 from .forms import FORM_TYPES
 
