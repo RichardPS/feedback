@@ -216,7 +216,8 @@ def create_launch_survey(
 
 def complete_launch_survey(
         request,
-        uuid):
+        uuid,
+        template_name='survey/feedback_form.html'):
     """ create feedback form """
     intro_text = LAUNCH_INTRO_TEXT
 
@@ -241,14 +242,16 @@ def complete_launch_survey(
         feedback_form = LaunchQuestionsForm()
         options_form = get_questions_form('launch')
 
+    context = {
+        'intro_text': intro_text,
+        'feedback_form': feedback_form,
+        'options_form': options_form
+        }
+
     return render(
         request,
-        'survey/feedback_form.html',
-        {
-            'intro_text': intro_text,
-            'feedback_form': feedback_form,
-            'options_form': options_form
-        }
+        template_name,
+        context
         )
 
 
