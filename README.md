@@ -20,9 +20,11 @@ source dev/bin/activate
 
 cd dev
 
-git clone https://github.com/RichardPS/jessica.git
+git clone https://github.com/RichardPS/feedback.git
 
 ## Install env requirements
+
+cd feedback
 
 pip install -r requirements.txt
 
