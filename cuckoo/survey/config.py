@@ -8,7 +8,7 @@ QUESTION_OPTIONS = (
 """ email contacts for low feedback """
 EMAIL_CONTACTS = {
     'support': 'richard.wood@primarysite.net',
-    'production': 'richard.wood@primarysite.net',
+    'launch': 'richard.wood@primarysite.net',
 }
 
 """ html text for form user feedback """

@@ -7,23 +7,38 @@ import pdb  # noqa: F401
 from .forms import FORM_TYPES
 
 
-def quality_alert_check(school_domain, school_scores, department):
+def quality_alert_check(school_domain, school_scores, department, uuid):
     """ check is scores are low """
+    email_call = False
     for score in school_scores:
-        if int(score) < 50:
-            email_low_score_alert(school_domain, school_scores, department)
+        if int(school_scores[score]) < 50:
+            email_call = True
+
+    if email_call:
+        email_low_score_alert(school_domain, school_scores, department, uuid)
 
     return
 
 
-def email_low_score_alert(school_domain, school_scores, department):
+def email_low_score_alert(school_domain, school_scores, department, uuid):
     """ email manager if scores are low """
+    subject = 'Low {0} score alert {1}'.format(department, school_domain)
+    message = ""
+    for score in school_scores:
+        message = message + "{0}: {1}\n".format(
+            score,
+            school_scores[score],
+            )
+
+    message = message + "\nAdd url here with direct link {0}\n".format(uuid)
+
+    sender = 'feedback@primarysite.net'
     sendto = EMAIL_CONTACTS[department]
 
     send_mail(
-        'Low Score Alert{0}'.format(school_domain),
-        'scores go here',
-        'test@appletongate.co.uk',
+        subject,
+        message,
+        sender,
         [sendto],
         fail_silently=False,
         )
