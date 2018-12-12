@@ -21,6 +21,10 @@ urlpatterns = [
         views.view_all_support_surveys,
         name='view_all_support_surveys'
         ),
+    url(r'^admin/support_survey/(?P<uuid>[a-f0-9]+)$',
+        views.view_support_survey,
+        name='view_support_survey'
+        ),
     url(r'^json/support/(?P<startdate>\d{4}-\d{2}-\d{2})/(?P<enddate>\d{4}-\d{2}-\d{2})/$',
         views.json_support,
         name='json_support'

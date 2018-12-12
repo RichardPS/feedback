@@ -174,6 +174,24 @@ def view_all_support_surveys(
         context
         )
 
+@login_required
+def view_support_survey(
+    request,
+    uuid,
+    template_name='survey/view_support_survey.html'):
+
+    surveys = SupportSurvey.objects.filter(uuid=uuid)
+    # pdb.set_trace()
+    context = {
+        'surveys': surveys
+        }
+
+    return render(
+        request,
+        template_name,
+        context
+        )
+
 
 def json_support(
         request,
