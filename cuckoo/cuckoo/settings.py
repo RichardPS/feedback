@@ -125,8 +125,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# EMAIL CONFIG
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+BASE_SITE_DOMAIN = 'localhost:8000/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 

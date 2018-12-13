@@ -50,6 +50,10 @@ urlpatterns = [
         views.view_all_launch_surveys,
         name='view_all_launch_surveys'
         ),
+    url(r'^admin/launch_survey/(?P<uuid>[a-f0-9-]+)$',
+        views.view_launch_survey,
+        name='view_launch_survey',
+        ),
     url(r'^json/launch/(?P<startdate>\d{4}-\d{2}-\d{2})/(?P<enddate>\d{4}-\d{2}-\d{2})/$',
         views.json_launch,
         name='json_launch'

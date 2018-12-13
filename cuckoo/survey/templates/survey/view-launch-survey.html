@@ -1,0 +1,47 @@
+{% extends "survey/template.html" %}
+{% load staticfiles %}
+
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+    <h1>Feedback for {{ survey.domain }}</h1>
+    <table border="1" cellpadding="4" cellspacing="0">
+        <tr>
+            <th>Date</th>
+            <th>School</th>
+            <th class="showme">Launch</th>
+            <th class="showme">Customer Services</th>
+            <th class="showme">Sales Advisor</th>
+            <th class="showme">Date Ordered</th>
+            <th class="showme">date Launched</th>
+            <th class="showme">Trunaround Days</th>
+            <th class="showme">Design Rating</th>
+            <th class="showme">Time Rating</th>
+            <th class="showme">CS Rating</th>
+            <th class="showme">Training Rating</th>
+            <th>Comments</th>
+            <th class="showme">OK For Marketing?</th>
+        </tr>
+    {% for item in feedback %}
+        <tr>
+            <td>{{ item.date_submitted }}</td>
+            <td><a href="{{ survey.domain }}" target="_blank">{{ survey.domain }}</a></td>
+            <td>{{ survey.uuid }}</td>
+            <td>{{ survey.advisor }}</td>
+            <td>{{ survey.sales }}</td>
+            <td>{{ survey.ordered }}</td>
+            <td>{{ survey.launched }}</td>
+            <td>{{ survey.time_to_launch.days }}</td>
+            <td>{{ item.quality }}</td>
+            <td>{{ item.speed }}</td>
+            <td>{{ item.service }}</td>
+            <td>{{ item.training }}</td>
+            <td>{{ item.comment }}</td>
+            <td>{{ item.marketing }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock content %}
+
+{% block scripts %}{% endblock scripts %}

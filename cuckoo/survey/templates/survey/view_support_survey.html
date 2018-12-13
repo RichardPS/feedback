@@ -4,7 +4,7 @@
 {% block styles %}{% endblock styles %}
 
 {% block content %}
-
+    <h1>Feedback for {{ survey.domain }}</h1>
     <table border="1" cellpadding="4" cellspacing="0">
         <tr>
             <th>Date</th>
@@ -24,13 +24,13 @@
     {% for item in feedback %}
         <tr>
             <td>{{ item.date_submitted }}</td>
-            <td><a href="{{ item.support_item.domain }}" target="_blank">{{ item.support_item.domain }}</a></td>
-            <td>{{ item.support_item.price }}</td>
-            <td>{{ item.support_item.details }}</td>
-            <td>{{ item.support_item.completed_by }}</td>
-            <td>{{ item.support_item.time }}</td>
-            <td>{{ item.support_item.checked_by }}</td>
-            <td>{{ item.support_item.set_up_by }}</td>
+            <td><a href="{{ survey.domain }}" target="_blank">{{ survey.domain }}</a></td>
+            <td>{{ survey.price }}</td>
+            <td>{{ survey.details }}</td>
+            <td>{{ survey.completed_by }}</td>
+            <td>{{ survey.time }}</td>
+            <td>{{ survey.checked_by }}</td>
+            <td>{{ survey.set_up_by }}</td>
             <td>{{ item.quality }}</td>
             <td>{{ item.speed }}</td>
             <td>{{ item.service }}</td>

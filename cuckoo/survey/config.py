@@ -9,7 +9,7 @@ DEFAULT_THRESHOLD_SCORE = 50
 
 """ email contacts for low feedback """
 EMAIL_CONTACTS = {
-    'support': 'alzirmail@gmail.com',
+    'support': 'richard.wood@primarysite.net',
     'launch': 'richard.wood@primarysite.net',
 }
 

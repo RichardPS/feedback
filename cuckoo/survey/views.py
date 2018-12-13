@@ -315,6 +315,26 @@ def view_all_launch_surveys(
         )
 
 
+@login_required
+def view_launch_survey(
+    request,
+    uuid,
+    template_name='survey/view-launch-survey.html'):
+
+    survey = LaunchSurvey.objects.get(uuid=uuid)
+    feedback = survey.launchquestions_set.all()
+
+    context = {
+        'survey': survey,
+        'feedback': feedback
+        }
+
+    return render(
+        request,
+        template_name,
+        context
+        )
+
 def json_launch(
         request,
         startdate,
