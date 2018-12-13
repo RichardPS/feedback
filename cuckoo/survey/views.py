@@ -180,10 +180,12 @@ def view_support_survey(
     uuid,
     template_name='survey/view_support_survey.html'):
 
-    surveys = SupportSurvey.objects.filter(uuid=uuid)
+    survey = SupportSurvey.objects.get(uuid=uuid)
+    feedback = survey.supportquestions_set.all()
     # pdb.set_trace()
     context = {
-        'surveys': surveys
+        'survey': survey,
+        'feedback': feedback
         }
 
     return render(
