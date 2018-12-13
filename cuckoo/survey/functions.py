@@ -1,4 +1,5 @@
 from django.core.mail import send_mail
+from .config import DEFAULT_THRESHOLD_SCORE
 from .config import EMAIL_CONTACTS
 
 from datetime import datetime
@@ -7,11 +8,16 @@ import pdb  # noqa: F401
 from .forms import FORM_TYPES
 
 
-def quality_alert_check(school_domain, school_scores, department, uuid):
+def quality_alert_check(
+    school_domain,
+    school_scores,
+    department,
+    uuid,
+    threshold=DEFAULT_THRESHOLD_SCORE):
     """ check is scores are low """
     email_call = False
     for score in school_scores:
-        if int(school_scores[score]) < 50:
+        if int(school_scores[score]) < threshold:
             email_call = True
 
     if email_call:
@@ -30,7 +36,10 @@ def email_low_score_alert(school_domain, school_scores, department, uuid):
             school_scores[score],
             )
 
-    message = message + "\nAdd url here with direct link {0}\n".format(uuid)
+    message = message + "{0}/survey/support/{1}".format(
+                request.META['HTTP_HOST'],
+                uuid,
+                )
 
     sender = 'feedback@primarysite.net'
     sendto = EMAIL_CONTACTS[department]
@@ -56,3 +65,11 @@ def convert_str_to_date(date_str):
 
 def get_questions_form(form_type):
     return FORM_TYPES[form_type]
+
+
+def make_permalink(url, protocol='http', domain=settings.BASE_SITE_DOMAIN):
+    return '{protocol}://{domain}{url}'.format(
+        protocol=protocol,
+        domain=domain,
+        url=url
+        )

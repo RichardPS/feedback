@@ -5,9 +5,11 @@ QUESTION_OPTIONS = (
     ('100', 'Excelent'),
     )
 
+DEFAULT_THRESHOLD_SCORE = 50
+
 """ email contacts for low feedback """
 EMAIL_CONTACTS = {
-    'support': 'richard.wood@primarysite.net',
+    'support': 'alzirmail@gmail.com',
     'launch': 'richard.wood@primarysite.net',
 }
 

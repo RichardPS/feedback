@@ -20,6 +20,12 @@ class SupportSurvey(models.Model):
     def __str__(self):
         return '{0}'.format(self.domain)
 
+    def get_absolute_url(self):
+        return reverse(
+            'single_survey',
+            args=[str(self.uuid)]
+            )
+
 
 class SupportQuestions(models.Model):
     """ questions for support survey """

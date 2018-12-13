@@ -9,7 +9,7 @@ urlpatterns = [
         views.create_support_survey,
         name='create_support_survey'
         ),
-    url(r'^survey/support/(?P<uuid>[a-f0-9]+)$',
+    url(r'^survey/support/(?P<uuid>[a-f0-9-]+)$',
         views.complete_support_survey,
         name='complete_support_survey'
         ),
@@ -21,7 +21,7 @@ urlpatterns = [
         views.view_all_support_surveys,
         name='view_all_support_surveys'
         ),
-    url(r'^admin/support_survey/(?P<uuid>[a-f0-9]+)$',
+    url(r'^admin/support_survey/(?P<uuid>[a-f0-9-]+)$',
         views.view_support_survey,
         name='view_support_survey'
         ),
@@ -38,7 +38,7 @@ urlpatterns = [
         views.create_launch_survey,
         name='create_launch_survey'
         ),
-    url(r'^survey/launch/(?P<uuid>[a-f0-9]+)$',
+    url(r'^survey/launch/(?P<uuid>[a-f0-9-]+)$',
         views.complete_launch_survey,
         name='complete_launch_survey'
         ),

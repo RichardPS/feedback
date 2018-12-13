@@ -14,16 +14,16 @@ def support_question_saved(sender, instance, **kwargs):
 
     survey = instance.support_survey
     scores_list = {
-                'Quality': questions.quality,
-                'Speed': questions.speed,
-                'Service': questions.service,
+                'Quality': instance.quality,
+                'Speed': instance.speed,
+                'Service': instance.service,
             }
     department = 'support'
     quality_alert_check(
-                support_survey.domain,
+                survey.domain,
                 scores_list,
                 department,
-                support_survey.uuid,
+                survey.uuid,
                 )
 
 
@@ -36,15 +36,15 @@ def launch_question_saved(sender, instance, **kwargs):
     survey = instance.launch_survey
 
     scores_list = {
-        'Quality': questions.quality,
-        'Speed': questions.speed,
-        'Service': questions.service,
-        'Training': questions.training,
+        'Quality': instance.quality,
+        'Speed': instance.speed,
+        'Service': instance.service,
+        'Training': instance.training,
         }
     department = 'launch'
     quality_alert_check(
-        launch_survey.domain,
+        survey.domain,
         scores_list,
         department,
-        launch_survey.uuid,
+        survey.uuid,
         )
