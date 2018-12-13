@@ -90,17 +90,6 @@ def complete_support_survey(
             questions.speed = request.POST.get("speed")
             questions.service = request.POST.get("service")
 
-            scores_list = {
-                'Quality': questions.quality,
-                'Speed': questions.speed,
-                'Service': questions.service,
-            }
-
-            quality_alert_check(
-                support_survey.domain,
-                scores_list,
-                'support',
-                support_survey.uuid)
 
             questions.save()
             messages.success(request, "Success")
@@ -264,18 +253,6 @@ def complete_launch_survey(
             questions.speed = request.POST.get("speed")
             questions.service = request.POST.get("service")
             questions.training = request.POST.get("training")
-
-            scores_list = {
-                'Quality': questions.quality,
-                'Speed': questions.speed,
-                'Service': questions.service,
-                'Training': questions.training,
-            }
-
-            quality_alert_check(
-                launch_survey.domain,
-                scores_list, 'launch',
-                launch_survey.uuid)
 
             questions.save()
             messages.success(request, "Success")
