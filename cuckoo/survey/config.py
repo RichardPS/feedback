@@ -18,8 +18,6 @@ SUPPORT_INTRO_TEXT = "<p>Some intro blurb for the support feedback form</p>"
 
 LAUNCH_INTRO_TEXT = "<p>Some intro blurb for the launch feedback form</p>"
 
-REVIEW_INTRO_TEXT = "<p>Some intro blurb for the three month feedback form</p>"
-
 FEEDBACK_THANKYOU_MESSAGE = "<p>Thank you for your feedback</p>"
 
 """ question labels """
