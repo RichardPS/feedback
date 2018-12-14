@@ -23,7 +23,6 @@ from .config import LAUNCH_INTRO_TEXT
 
 from .functions import convert_str_to_date
 from .functions import get_questions_form
-from .functions import quality_alert_check
 
 
 # Create your views here.
@@ -89,7 +88,6 @@ def complete_support_survey(
             questions.quality = request.POST.get("quality")
             questions.speed = request.POST.get("speed")
             questions.service = request.POST.get("service")
-
 
             questions.save()
             messages.success(request, "Success")
@@ -163,11 +161,12 @@ def view_all_support_surveys(
         context
         )
 
+
 @login_required
 def view_support_survey(
-    request,
-    uuid,
-    template_name='survey/view_support_survey.html'):
+        request,
+        uuid,
+        template_name='survey/view_support_survey.html'):
 
     survey = SupportSurvey.objects.get(uuid=uuid)
     feedback = survey.supportquestions_set.all()
@@ -317,9 +316,9 @@ def view_all_launch_surveys(
 
 @login_required
 def view_launch_survey(
-    request,
-    uuid,
-    template_name='survey/view-launch-survey.html'):
+        request,
+        uuid,
+        template_name='survey/view-launch-survey.html'):
 
     survey = LaunchSurvey.objects.get(uuid=uuid)
     feedback = survey.launchquestions_set.all()
@@ -334,6 +333,7 @@ def view_launch_survey(
         template_name,
         context
         )
+
 
 def json_launch(
         request,

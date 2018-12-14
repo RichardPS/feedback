@@ -11,11 +11,11 @@ from .forms import FORM_TYPES
 
 
 def quality_alert_check(
-    school_domain,
-    school_scores,
-    department,
-    uuid,
-    threshold=DEFAULT_THRESHOLD_SCORE):
+        school_domain,
+        school_scores,
+        department,
+        uuid,
+        threshold=DEFAULT_THRESHOLD_SCORE):
     """ check is scores are low """
     email_call = False
     for score in school_scores:
@@ -37,7 +37,7 @@ def email_low_score_alert(school_domain, school_scores, department, uuid):
             score,
             school_scores[score],
             )
-    survey_url = make_permalink('admin/'+ department + '_survey/' + str(uuid))
+    survey_url = make_permalink('admin/' + department + '_survey/' + str(uuid))
     message = message + survey_url
 
     sender = 'feedback@primarysite.net'
@@ -67,9 +67,9 @@ def get_questions_form(form_type):
 
 
 def make_permalink(
-    url,
-    protocol='http',
-    domain=settings.BASE_SITE_DOMAIN):
+        url,
+        protocol='http',
+        domain=settings.BASE_SITE_DOMAIN):
     return '{protocol}://{domain}{url}'.format(
         protocol=protocol,
         domain=domain,

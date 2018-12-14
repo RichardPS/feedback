@@ -7,4 +7,4 @@ class SurveyConfig(AppConfig):
     verbose_name = "FEEDBACK SYSTEM"
 
     def ready(self):
-        from . import signals
+        from . import signals  # noqa: F401

@@ -96,3 +96,9 @@ http://localhost:8000/json/launch/YYYY-MM-DD/YYYY-MM-DD/
 
 * Thankyou message once feedback has been submitted is set in config.py
     * FEEDBACK_THANKYOU_MESSAGE
+
+
+## To Do List
+
+- [ ] Add permissions to restrict general logins from viewing all data
+- [ ] Create devtools to generate dummy data from testing
