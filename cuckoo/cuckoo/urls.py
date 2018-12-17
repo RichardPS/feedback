@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^backoffice/', admin.site.urls),
+    url(r'^accounts/login/$', auth_views.LoginView.as_view()),
     url(r'^', include('survey.urls'))
 ]
 handler404 = 'survey.views.page_not_found'

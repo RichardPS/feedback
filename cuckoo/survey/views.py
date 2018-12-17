@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -36,7 +37,7 @@ def page_not_found(request):
 
 
 # SUPPORT VIEWS
-@login_required
+@login_required(login_url='/accounts/login/')
 def create_support_survey(
         request,
         template_name='survey/create_support_survey.html'):
@@ -127,7 +128,7 @@ def survey_success(
         )
 
 
-@login_required
+@staff_member_required(login_url='/accounts/login/')
 def view_support_surverys(
         request,
         template_name='survey/view-support-surverys.html'):
@@ -145,7 +146,7 @@ def view_support_surverys(
         )
 
 
-@login_required
+@staff_member_required(login_url='/accounts/login/')
 def view_all_support_surveys(
         request,
         template_name='survey/view-support-surverys.html'):
@@ -162,7 +163,7 @@ def view_all_support_surveys(
         )
 
 
-@login_required
+@staff_member_required(login_url='/accounts/login/')
 def view_support_survey(
         request,
         uuid,
@@ -203,7 +204,7 @@ def json_support(
     return HttpResponse(json_data, content_type='application/json')
 
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def create_launch_survey(
         request,
         template_name='survey/create_launch_survey.html'):
@@ -275,7 +276,7 @@ def complete_launch_survey(
         )
 
 
-@login_required
+@staff_member_required(login_url='/accounts/login/')
 def view_launch_surveys(
         request,
         template_name='survey/view-launch-surverys.html'):
@@ -295,7 +296,7 @@ def view_launch_surveys(
         )
 
 
-@login_required
+@staff_member_required(login_url='/accounts/login/')
 def view_all_launch_surveys(
         request,
         template_name='survey/view-launch-surverys.html'):
@@ -314,7 +315,7 @@ def view_all_launch_surveys(
         )
 
 
-@login_required
+@staff_member_required(login_url='/accounts/login/')
 def view_launch_survey(
         request,
         uuid,
