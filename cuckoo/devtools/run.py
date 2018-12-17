@@ -12,21 +12,25 @@ __version__ = '1.0'
 
 
 def _make_admin_migrations():
+    """ make migrations for app """
     cmd = python['manage.py', 'makemigrations']
     cmd.run_fg()
 
 
 def _make_app_migrations():
+    """ Make migrations for survey app """
     cmd = python['manage.py', 'makemigrations', 'survey']
     cmd.run_fg()
 
 
 def _migrate():
+    """ Migrate models """
     cmd = python['manage.py', 'migrate']
     cmd.run_fg()
 
 
 def _add_superuser():
+    """ Add Superuser login for testing via json datadump """
     cmd = python[
         'manage.py',
         'loaddata',
@@ -35,6 +39,7 @@ def _add_superuser():
 
 
 def _loaddata():
+    """ Add mock data for testing via json datadump """
     cmd = python[
         'manage.py',
         'loaddata',
