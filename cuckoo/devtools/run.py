@@ -8,7 +8,7 @@ from plumbum.cmd import python
 
 LOCATION = os.path.dirname(os.path.abspath(__file__))
 
-__version__ = 1.0
+__version__ = '1.0'
 
 
 def _make_admin_migrations():
