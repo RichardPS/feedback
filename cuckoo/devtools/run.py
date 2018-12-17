@@ -26,11 +26,6 @@ def _migrate():
     cmd.run_fg()
 
 
-def _create_superuser():
-    cmd = python['manage.py', 'createsuperuser']
-    cmd.run_fg()
-
-
 def _add_superuser():
     cmd = python[
         'manage.py',
@@ -70,7 +65,18 @@ class CatchAllExceptions(click.Group):
 @click.command(help='Startup')
 def startup():
     """ Do all the setup stuff here """
-    success('Nothing was done')
+    _make_admin_migrations()
+    _make_app_migrations()
+    success('Migrations Made')
+
+    _migrate()
+    success('Migrations Made')
+
+    _loaddata()
+    success('Mock Data Loaded')
+
+    _add_superuser()
+    success('Test Superuser Added')
 
 
 @click.group()
