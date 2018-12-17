@@ -23,7 +23,6 @@ from .config import LAUNCH_INTRO_TEXT
 
 from .functions import convert_str_to_date
 from .functions import get_questions_form
-# from .functions import quality_alert_check
 
 
 # Create your views here.
@@ -163,6 +162,27 @@ def view_all_support_surveys(
         )
 
 
+@login_required
+def view_support_survey(
+        request,
+        uuid,
+        template_name='survey/view_support_survey.html'):
+
+    survey = SupportSurvey.objects.get(uuid=uuid)
+    feedback = survey.supportquestions_set.all()
+    # pdb.set_trace()
+    context = {
+        'survey': survey,
+        'feedback': feedback
+        }
+
+    return render(
+        request,
+        template_name,
+        context
+        )
+
+
 def json_support(
         request,
         startdate,
@@ -287,6 +307,27 @@ def view_all_launch_surveys(
         'all_launch_feedback': all_launch_feedback,
         'view_all': view_all
         }
+    return render(
+        request,
+        template_name,
+        context
+        )
+
+
+@login_required
+def view_launch_survey(
+        request,
+        uuid,
+        template_name='survey/view-launch-survey.html'):
+
+    survey = LaunchSurvey.objects.get(uuid=uuid)
+    feedback = survey.launchquestions_set.all()
+
+    context = {
+        'survey': survey,
+        'feedback': feedback
+        }
+
     return render(
         request,
         template_name,

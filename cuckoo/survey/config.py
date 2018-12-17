@@ -5,18 +5,18 @@ QUESTION_OPTIONS = (
     ('100', 'Excelent'),
     )
 
+DEFAULT_THRESHOLD_SCORE = 50
+
 """ email contacts for low feedback """
 EMAIL_CONTACTS = {
     'support': 'richard.wood@primarysite.net',
-    'production': 'richard.wood@primarysite.net',
+    'launch': 'richard.wood@primarysite.net',
 }
 
 """ html text for form user feedback """
 SUPPORT_INTRO_TEXT = "<p>Some intro blurb for the support feedback form</p>"
 
 LAUNCH_INTRO_TEXT = "<p>Some intro blurb for the launch feedback form</p>"
-
-REVIEW_INTRO_TEXT = "<p>Some intro blurb for the three month feedback form</p>"
 
 FEEDBACK_THANKYOU_MESSAGE = "<p>Thank you for your feedback</p>"
 

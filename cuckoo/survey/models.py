@@ -1,5 +1,6 @@
 from django.contrib import admin  # noqa: F401
 from django.db import models
+from django. urls import reverse
 
 import uuid
 
@@ -19,6 +20,12 @@ class SupportSurvey(models.Model):
 
     def __str__(self):
         return '{0}'.format(self.domain)
+
+    def get_absolute_url(self):
+        return reverse(
+            'single_survey',
+            args=[str(self.uuid)]
+            )
 
 
 class SupportQuestions(models.Model):
@@ -40,6 +47,7 @@ class LaunchSurvey(models.Model):
     """ inital data for launch survey """
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     domain = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
     advisor = models.CharField(max_length=255)
     sales = models.CharField(max_length=255)
     ordered = models.DateField(
@@ -56,6 +64,12 @@ class LaunchSurvey(models.Model):
 
     def __str__(self):
         return '{0}'.format(self.domain)
+
+    def get_absolute_url(self):
+        return reverse(
+            'single_survey',
+            args=[str(self.uuid)]
+            )
 
 
 class LaunchQuestions(models.Model):

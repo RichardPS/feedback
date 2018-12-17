@@ -8,3 +8,5 @@ migrations/
 
 site_config.py
 site_config.pyc
+email_config.py
+email_config.pyc
