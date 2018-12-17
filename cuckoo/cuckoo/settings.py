@@ -127,7 +127,8 @@ STATIC_URL = '/static/'
 
 BASE_SITE_DOMAIN = 'localhost:8000/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_HOST = MAIL_HOST
 EMAIL_PORT = MAIL_PORT

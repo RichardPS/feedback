@@ -47,6 +47,7 @@ class LaunchSurvey(models.Model):
     """ inital data for launch survey """
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     domain = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
     advisor = models.CharField(max_length=255)
     sales = models.CharField(max_length=255)
     ordered = models.DateField(
