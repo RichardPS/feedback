@@ -12,9 +12,9 @@ python devtools/run.py startup
 
 ### Launch Surveys
 
-[Launch survey link for http://www.mysite.co.uk](localhost:8000/survey/launch/290cf22a-3a97-4c4e-b5c3-eebc234821d3)
+localhost:8000/survey/launch/290cf22a-3a97-4c4e-b5c3-eebc234821d3
 
-[Support survey link for http://www.yoursite.co.uk](localhost:8000/survey/support/e99e14d9-bd59-486f-970b-f092a07fd318 )
+localhost:8000/survey/support/e99e14d9-bd59-486f-970b-f092a07fd318
 
 ## Create Config Files
 
