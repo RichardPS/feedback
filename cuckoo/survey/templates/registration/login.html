@@ -1,0 +1,17 @@
+{% extends "survey/template.html" %}
+{% load staticfiles %}
+
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <button type="submit">Login</button>
+  </form>
+
+{% endblock content %}
+
+{% block scripts %}{% endblock scripts %}

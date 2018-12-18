@@ -3,6 +3,10 @@
 
 {% block styles %}{% endblock styles %}
 
+{% block nav %}
+    {% include "survey/nav.html" %}
+{% endblock nav %}
+
 {% block content %}
 
     {% if view_all %}
@@ -12,6 +16,7 @@
     {% endif %}
 
     <a id="geoffmode">Geoff Mode</a>
+
     <table border="1" cellpadding="4" cellspacing="0">
         <tr>
             <th>Date</th>

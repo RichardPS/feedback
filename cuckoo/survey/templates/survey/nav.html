@@ -1,0 +1,9 @@
+<ul class="nav">
+    <li><a href="/create/support/">Create Support Survey</a></li>
+    <li><a href="/create/launch/">Create Launch Survey</a></li>
+    <li><a href="/admin/support/">View Support Feedback</a></li>
+    <li><a href="/admin/launch/">View Launch Feedback</a></li>
+    {% if user.is_authenticated %}
+        <li><a href="/logout/">Logout</a></li>
+    {% endif %}
+</ul>

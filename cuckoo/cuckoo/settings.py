@@ -125,6 +125,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = "/admin/"
+
 BASE_SITE_DOMAIN = 'localhost:8000/'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
