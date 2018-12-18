@@ -32,6 +32,10 @@ pip install -r requirements.txt
 
 feedback/cuckoo/cuckoo/site_config.py
 
+## Add Email config
+
+feedback/cuckoo/cuckoo/email_config.py
+
 ## Requirments
 
 Django==1.11.
@@ -100,5 +104,18 @@ http://localhost:8000/json/launch/YYYY-MM-DD/YYYY-MM-DD/
 
 ## To Do List
 
-- [ ] Add permissions to restrict general logins from viewing all data
-- [ ] Create devtools to generate dummy data from testing
+- [x] Add permissions to restrict general logins from viewing all data
+- [x] Create devtools to generate dummy data from testing
+
+
+## Devtools Added
+
+### See README
+
+feedback/cuckoo/devtools
+
+### Extra requirements
+
+click==7.0
+
+plumbum==1.6.7
