@@ -3,43 +3,57 @@
 
 {% block styles %}{% endblock styles %}
 
+{% block nav %}
+    {% include "survey/nav.html" %}
+{% endblock nav %}
+
 {% block content %}
+
+    {% if view_all %}
+        <a href="/admin/support/" id="switchview">View Unique</a>
+    {% else %}
+        <a href="/admin/all-support/" id="switchview">View All</a>
+    {% endif %}
+
+    <a id="geoffmode">Geoff Mode</a>
 
     <table border="1" cellpadding="4" cellspacing="0">
         <tr>
             <th>Date</th>
             <th>School</th>
-            <th>Cost</th>
-            <th>Details</th>
-            <th>Completed By</th>
-            <th>Time</th>
-            <th>Checked By</th>
-            <th>Set Up By</th>
-            <th>Quality</th>
-            <th>Speed</th>
-            <th>CS</th>
+            <th class="showme">Cost</th>
+            <th class="showme">Details</th>
+            <th class="showme">Completed By</th>
+            <th class="showme">Time</th>
+            <th class="showme">Checked By</th>
+            <th class="showme">Set Up By</th>
+            <th class="showme">Quality</th>
+            <th class="showme">Speed</th>
+            <th class="showme">CS</th>
             <th>Comments</th>
-            <th>OK For Marketing?</th>
+            <th class="showme">OK For Marketing?</th>
         </tr>
     {% for survey in all_support_feedback %}
         <tr>
             <td>{{ survey.date_submitted }}</td>
             <td><a href="{{ survey.support_survey.domain }}" target="_blank">{{ survey.support_survey.domain }}</a></td>
-            <td>{{ survey.support_survey.price }}</td>
-            <td>{{ survey.support_survey.details }}</td>
-            <td>{{ survey.support_survey.completed_by }}</td>
-            <td>{{ survey.support_survey.time }}</td>
-            <td>{{ survey.support_survey.checked_by }}</td>
-            <td>{{ survey.support_survey.set_up_by }}</td>
-            <td>{{ survey.quality }}</td>
-            <td>{{ survey.speed }}</td>
-            <td>{{ survey.service }}</td>
+            <td class="showme">{{ survey.support_survey.price }}</td>
+            <td class="showme">{{ survey.support_survey.details }}</td>
+            <td class="showme">{{ survey.support_survey.completed_by }}</td>
+            <td class="showme">{{ survey.support_survey.time }}</td>
+            <td class="showme">{{ survey.support_survey.checked_by }}</td>
+            <td class="showme">{{ survey.support_survey.set_up_by }}</td>
+            <td class="showme">{{ survey.quality }}</td>
+            <td class="showme">{{ survey.speed }}</td>
+            <td class="showme">{{ survey.service }}</td>
             <td>{{ survey.comment }}</td>
-            <td>{{ survey.marketing }}</td>
+            <td class="showme">{{ survey.marketing }}</td>
         </tr>
     {% endfor %}
     </table>
 
 {% endblock content %}
 
-{% block scripts %}{% endblock scripts %}
+{% block scripts %}
+    <script type='text/javascript' src='{% static "js/geoff-mode.js" %}'></script>
+{% endblock scripts %}

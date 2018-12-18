@@ -3,9 +3,12 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    url(r'^admin/$',
+        views.admin_area,
+        name='admin_area'
+        ),
     # SUPPORT URLS
-    url(
-        r'^create/support/$',
+    url(r'^create/support/$',
         views.create_support_survey,
         name='create_support_survey'
         ),

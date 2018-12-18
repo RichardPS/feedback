@@ -3,6 +3,10 @@
 
 {% block styles %}{% endblock styles %}
 
+{% block nav %}
+    {% include "survey/nav.html" %}
+{% endblock nav %}
+
 {% block content %}
     <h1>Feedback for {{ survey.domain }}</h1>
     <table border="1" cellpadding="4" cellspacing="0">

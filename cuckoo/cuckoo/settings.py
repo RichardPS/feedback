@@ -125,7 +125,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = "/admin/"
 
 BASE_SITE_DOMAIN = 'localhost:8000/'
 

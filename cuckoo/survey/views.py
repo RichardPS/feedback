@@ -26,7 +26,7 @@ from .functions import convert_str_to_date
 from .functions import get_questions_form
 
 
-# Create your views here.
+# 404 Page.
 def page_not_found(request):
     response = render(
         request,
@@ -35,9 +35,20 @@ def page_not_found(request):
     response.status_code = PAGE_NOT_FOUND
     return response
 
+def admin_area(
+        request,
+        template_name='survey/admin_area.html'):
+
+    context = {}
+
+    return render (
+        request,
+        template_name,
+        context
+        )
 
 # SUPPORT VIEWS
-@login_required(login_url='/accounts/login/')
+@login_required()
 def create_support_survey(
         request,
         template_name='survey/create_support_survey.html'):
@@ -128,16 +139,18 @@ def survey_success(
         )
 
 
-@staff_member_required(login_url='/accounts/login/')
+@staff_member_required()
 def view_support_surverys(
         request,
         template_name='survey/view-support-surverys.html'):
     """ admin view first surveys """
     all_support_feedback = SupportQuestions.objects.all()
     all_support_feedback = all_support_feedback.distinct('support_survey')
+    view_all = False
 
     context = {
-        'all_support_feedback': all_support_feedback
+        'all_support_feedback': all_support_feedback,
+        'view_all': view_all
     }
     return render(
         request,
@@ -146,15 +159,17 @@ def view_support_surverys(
         )
 
 
-@staff_member_required(login_url='/accounts/login/')
+@staff_member_required()
 def view_all_support_surveys(
         request,
         template_name='survey/view-support-surverys.html'):
     """ admin view all surveys """
     all_support_feedback = SupportQuestions.objects.all()
+    view_all = True
 
     context = {
-        'all_support_feedback': all_support_feedback
+        'all_support_feedback': all_support_feedback,
+        'view_all': view_all
         }
     return render(
         request,
@@ -163,7 +178,7 @@ def view_all_support_surveys(
         )
 
 
-@staff_member_required(login_url='/accounts/login/')
+@staff_member_required()
 def view_support_survey(
         request,
         uuid,
@@ -204,7 +219,7 @@ def json_support(
     return HttpResponse(json_data, content_type='application/json')
 
 
-@login_required(login_url='/accounts/login/')
+@login_required()
 def create_launch_survey(
         request,
         template_name='survey/create_launch_survey.html'):
@@ -276,7 +291,7 @@ def complete_launch_survey(
         )
 
 
-@staff_member_required(login_url='/accounts/login/')
+@staff_member_required()
 def view_launch_surveys(
         request,
         template_name='survey/view-launch-surverys.html'):
@@ -296,7 +311,7 @@ def view_launch_surveys(
         )
 
 
-@staff_member_required(login_url='/accounts/login/')
+@staff_member_required()
 def view_all_launch_surveys(
         request,
         template_name='survey/view-launch-surverys.html'):
@@ -315,7 +330,7 @@ def view_all_launch_surveys(
         )
 
 
-@staff_member_required(login_url='/accounts/login/')
+@staff_member_required()
 def view_launch_survey(
         request,
         uuid,
