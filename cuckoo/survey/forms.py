@@ -16,6 +16,17 @@ class MyDateInput(TextInput):
     input_type = 'date'
 
 
+class DateFilter(forms.Form):
+    startdate = forms.DateField()
+    enddate = forms.DateField()
+
+    def __init__(self, *args, **kwargs):
+        super(DateFilter, self).__init__(*args, **kwargs)
+        self.fields['startdate'].widget = MyDateInput(attrs={'class': 'date'})
+        self.fields['enddate'].widget = MyDateInput(attrs={'class': 'date'})
+
+
+
 class SupportSurveyForm(forms.Form):
     domain = forms.CharField(max_length=255)
     regarding = forms.CharField(max_length=255)

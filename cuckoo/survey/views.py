@@ -1,12 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.serializers import serialize
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 import pdb  # noqa: F401
 
+from .forms import DateFilter
 from .forms import LaunchSurveyForm
 from .forms import SupportSurveyForm
 from .forms import SupportQuestionsForm
@@ -148,9 +150,19 @@ def view_support_surverys(
     all_support_feedback = all_support_feedback.distinct('support_survey')
     view_all = False
 
+    startdate = request.GET.get('startdate')
+    enddate = request.GET.get('enddate')
+
+    if startdate:
+        all_support_feedback = all_support_feedback.filter(
+            date_submitted__range=(startdate, enddate))
+
+    datefilter_form = DateFilter()
+
     context = {
         'all_support_feedback': all_support_feedback,
-        'view_all': view_all
+        'view_all': view_all,
+        'datefilter_form': datefilter_form
     }
     return render(
         request,
@@ -167,9 +179,19 @@ def view_all_support_surveys(
     all_support_feedback = SupportQuestions.objects.all()
     view_all = True
 
+    startdate = request.GET.get('startdate')
+    enddate = request.GET.get('enddate')
+
+    if startdate:
+        all_support_feedback = all_support_feedback.filter(
+            date_submitted__range=(startdate, enddate))
+
+    datefilter_form = DateFilter()
+
     context = {
         'all_support_feedback': all_support_feedback,
-        'view_all': view_all
+        'view_all': view_all,
+        'datefilter_form': datefilter_form
         }
     return render(
         request,
@@ -300,9 +322,19 @@ def view_launch_surveys(
     all_launch_feedback = all_launch_feedback.distinct('launch_survey')
     view_all = False
 
+    startdate = request.GET.get('startdate')
+    enddate = request.GET.get('enddate')
+
+    if startdate:
+        all_launch_feedback = all_launch_feedback.filter(
+            date_submitted__range=(startdate, enddate))
+
+    datefilter_form = DateFilter()
+
     context = {
         'all_launch_feedback': all_launch_feedback,
-        'view_all': view_all
+        'view_all': view_all,
+        'datefilter_form': datefilter_form
         }
     return render(
         request,
@@ -319,9 +351,19 @@ def view_all_launch_surveys(
     all_launch_feedback = LaunchQuestions.objects.all()
     view_all = True
 
+    startdate = request.GET.get('startdate')
+    enddate = request.GET.get('enddate')
+
+    if startdate:
+        all_launch_feedback = all_launch_feedback.filter(
+            date_submitted__range=(startdate, enddate))
+
+    datefilter_form = DateFilter()
+
     context = {
         'all_launch_feedback': all_launch_feedback,
-        'view_all': view_all
+        'view_all': view_all,
+        'datefilter_form': datefilter_form
         }
     return render(
         request,

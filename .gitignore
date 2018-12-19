@@ -1,6 +1,7 @@
 .git/
 __pycache__/
 migrations/
+survey/migrations/
 .DS_Store
 
 *.pyc

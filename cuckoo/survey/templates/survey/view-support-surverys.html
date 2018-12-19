@@ -17,6 +17,16 @@
 
     <a id="geoffmode">Geoff Mode</a>
 
+    <form class="date-select" method="GET">
+        {{ datefilter_form.as_ul }}
+        <input type="submit" value="Filter">
+        {% if view_all %}
+            <a href="/admin/all-support/">Reset Filter</a>
+        {% else %}
+            <a href="/admin/support/">Reset Filter</a>
+        {% endif %}
+    </form>
+
     <table border="1" cellpadding="4" cellspacing="0">
         <tr>
             <th>Date</th>
