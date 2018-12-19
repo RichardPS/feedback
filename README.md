@@ -106,6 +106,8 @@ http://localhost:8000/json/launch/YYYY-MM-DD/YYYY-MM-DD/
 
 - [x] Add permissions to restrict general logins from viewing all data
 - [x] Create devtools to generate dummy data from testing
+- [ ] Add pagination to feedback results
+- [ ] Add date filtering to feedback results
 
 
 ## Devtools Added

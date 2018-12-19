@@ -30,11 +30,8 @@ def _migrate():
 
 
 def _add_superuser():
-    """ Add Superuser login for testing via json datadump """
-    cmd = python[
-        'manage.py',
-        'loaddata',
-        '{0}/su.json'.format(LOCATION)]
+    """ Add Superuser """
+    cmd = python['manage.py', 'createsuperuser']
     cmd.run_fg()
 
 
