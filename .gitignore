@@ -5,6 +5,9 @@ migrations/
 
 *.py[co]
 *.sqlite3
+*.log
 
 site_config.py
 email_config.py
+Vagrantfile
+.vagrant/
