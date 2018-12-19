@@ -62,6 +62,22 @@
     {% endfor %}
     </table>
 
+    <div class="pagination">
+        <span class="step-links">
+            {% if all_support_feedback.has_previous %}
+                <a href="?page={{ all_support_feedback.previous_page_number }}&startdate={{ all_support_feedback.startdate }}&enddate={{ all_support_feedback.enddate }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ all_support_feedback.number }} of {{ all_support_feedback.paginator.num_pages }}.
+            </span>
+
+            {% if all_support_feedback.has_next %}
+                <a href="?page={{ all_support_feedback.next_page_number }}&startdate={{ all_support_feedback.startdate }}&enddate={{ all_support_feedback.enddate }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+
 {% endblock content %}
 
 {% block scripts %}

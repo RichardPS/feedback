@@ -152,10 +152,26 @@ def view_support_surverys(
 
     startdate = request.GET.get('startdate')
     enddate = request.GET.get('enddate')
+    page = request.GET.get('page')
 
     if startdate:
         all_support_feedback = all_support_feedback.filter(
             date_submitted__range=(startdate, enddate))
+    else:
+        startdate = ""
+        enddate = ""
+
+    paginator = Paginator(all_support_feedback, 1)
+
+    try:
+        all_support_feedback = paginator.page(page)
+    except PageNotAnInteger:
+        all_support_feedback = paginator.page(1)
+    except EmptyPage:
+        all_support_feedback = paginator.page(paginator.num_pages)
+
+    all_support_feedback.startdate = startdate
+    all_support_feedback.enddate = enddate
 
     datefilter_form = DateFilter()
 
