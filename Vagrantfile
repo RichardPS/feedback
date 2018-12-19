@@ -4,9 +4,10 @@
 
 VM_NAME = "cuckoo"
 VAGRANT_BOX = "ubuntu/cosmic64"
+SYNC_FOLDER = "/home/vagrant/" + VM_NAME
 
 # Project specific script
-$provisioning_script = <<PSCRIPT
+PROVISIONING_SCRIPT = <<EOF
   apt-get update
   apt-get install -y git
   apt-get install -y \
@@ -23,9 +24,13 @@ $provisioning_script = <<PSCRIPT
   apt-get update
   apt-get upgrade -y
   apt-get autoremove -y
+EOF
 
+
+VIRTUALENV_SCRIPT = <<EOF
   python3 -m venv .venv
-PSCRIPT
+  cp #{VM_NAME}/etc/.profile .
+EOF
 
 Vagrant.configure("2") do |config|
   required_plugins = %w( vagrant-notify-forwarder )
@@ -39,7 +44,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8000, host: 8121
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   config.vm.network "private_network", type: "dhcp"
-  config.vm.synced_folder "./" + VM_NAME, "/home/vagrant/" + VM_NAME, id: "vagrant-root", :nfs => true
+  config.vm.synced_folder ".", SYNC_FOLDER, id: "vagrant-root", :nfs => true
 
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--memory", "1024"]
@@ -56,5 +61,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.base_mac = ""
 
-  config.vm.provision "provisioning", type: "shell", inline: $provisioning_script
+  config.vm.provision "provisioning", type: "shell", inline: PROVISIONING_SCRIPT
+  config.vm.provision "virtualenv", type: "shell", privileged: false, inline: VIRTUALENV_SCRIPT
 end
