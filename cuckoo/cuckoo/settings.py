@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'cuckoo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'feedback',
+        'NAME': 'feedback.sqlite3',
     }
 }
 
