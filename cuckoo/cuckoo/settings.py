@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-from .site_config import USER, PASSWORD, NAME
-from .email_config import MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASSWORD, MAIL_TLS
+# from .site_config import USER, PASSWORD, NAME
+# from .email_config import MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASSWORD, MAIL_TLS
 
 import os
 
@@ -78,12 +78,8 @@ WSGI_APPLICATION = 'cuckoo.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': NAME,
-        'USER': USER,
-        'PASSWORD': PASSWORD,
-        'HOST': 'localhost',
-        'POST': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'feedback',
     }
 }
 
@@ -130,11 +126,4 @@ LOGOUT_REDIRECT_URL = "/admin/"
 
 BASE_SITE_DOMAIN = 'localhost:8000/'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-EMAIL_HOST = MAIL_HOST
-EMAIL_PORT = MAIL_PORT
-EMAIL_HOST_USER = MAIL_USER
-EMAIL_HOST_PASSWORD = MAIL_PASSWORD
-EMAIL_USE_TLS = MAIL_TLS

@@ -145,7 +145,7 @@ def view_support_surverys(
         template_name='survey/view-support-surverys.html'):
     """ admin view first surveys """
     all_support_feedback = SupportQuestions.objects.all()
-    all_support_feedback = all_support_feedback.distinct('support_survey')
+    all_support_feedback = all_support_feedback.distinct()
     view_all = False
 
     context = {
@@ -212,7 +212,7 @@ def json_support(
             startdate,
             enddate
             )
-        ).distinct('support_survey')
+        ).distinct()
 
     json_data = serialize('json', all_support_feedback)
 
@@ -297,7 +297,7 @@ def view_launch_surveys(
         template_name='survey/view-launch-surverys.html'):
     """ admin view first surveys """
     all_launch_feedback = LaunchQuestions.objects.all()
-    all_launch_feedback = all_launch_feedback.distinct('launch_survey')
+    all_launch_feedback = all_launch_feedback.distinct()
     view_all = False
 
     context = {
@@ -364,7 +364,7 @@ def json_launch(
             startdate,
             enddate
             )
-        ).distinct('launch_survey')
+        ).distinct()
 
     json_data = serialize('json', all_launch_feedback)
 
