@@ -11,4 +11,4 @@ site_config.py
 email_config.py
 Vagrantfile
 .vagrant/
-venv/
+
