@@ -31,7 +31,11 @@
 </head>
 <body>
     <header>
-        <img src='{% static "images/primarysite.png" %}' height='84px' width='478px'/>
+      <a href="/">
+          <svg>
+              <use xlink:href="{% static 'images/ps-logo.svg' %}#icon-logo-colour"></use>
+          </svg>
+      </a>
         {% block header %}{% endblock header %}
     </header>
 
