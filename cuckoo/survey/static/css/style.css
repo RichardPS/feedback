@@ -122,6 +122,39 @@ footer a:hover {
   fill: #fff;
 }
 
+[type="submit"] {
+  display: inline-block;
+  background-color: #ffce4f;
+  border: 1px solid #ffce4f;
+  text-decoration: none;
+  color: #003366;
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .2rem;
+  padding: 1.4rem 3.5rem;
+  border-radius: 5px;
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+  margin: 2rem 0 1rem;
+  -webkit-transition: all .15s ease;
+  -o-transition: all .15s ease;
+  transition: all .15s ease;
+  position: relative;
+  z-index: 10;
+  text-shadow: none;
+}
+
+[type="submit"]:focus,
+[type="submit"]:hover {
+  -webkit-transform: translateY(-0.2rem) scale(1.005);
+  -ms-transform: translateY(-0.2rem) scale(1.005);
+  transform: translateY(-0.2rem) scale(1.005);
+  -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  border: 1px solid #ffeab5;
+}
+
 /* MEH-potatos
 ============== */
 #switchview {
@@ -153,12 +186,6 @@ footer a:hover {
 .icon-satifactory:before{content:'\0042';}
 .icon-excelent:before{content:'\0043';}
 */
-.icon-primarysite:before {
-  content: '\0044';
-  color: #ed7983;
-  font-size: 1.6rem;
-}
-
 .icon-404:before {
   content: '\0045';
   color: #ed7983;
