@@ -24,26 +24,30 @@ body {
 
 /* main-header */
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    width: 100%;
-    background: #003366;
-    color: #fff;
-    height: 60px;
-    padding: 0 20px;
-    box-sizing: border-box;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 101;
+  /*position: fixed;*/
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  background: #003366;
+  color: #fff;
+  height: 60px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 101;
 }
 
 header .brand {
-    display: flex;
-    width: 170px;
-    height: 100%;
-    align-items: center;
+  display: flex;
+  width: 170px;
+  height: 100%;
+  align-items: center;
+}
+
+header .brand svg {
+  height: 100%;
 }
 
 .ps-phone {
@@ -65,7 +69,6 @@ header .brand {
   color: #ffce4f;
 }
 
-
 /* MEH-potatos
 ============== */
 #switchview {
@@ -82,7 +85,6 @@ header .brand {
   cursor: pointer;
 }
 
-
 [class*='icon-']:before {
   display: inline-block;
   font-family: 'Glyphter';
@@ -98,7 +100,6 @@ header .brand {
 .icon-satifactory:before{content:'\0042';}
 .icon-excelent:before{content:'\0043';}
 */
-
 .icon-primarysite:before {
   content: '\0044';
   color: #ed7983;
