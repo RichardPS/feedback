@@ -1,59 +1,68 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
 
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
 
-    <title>{{ page_name }}</title>
+  <title>{{ page_name }}</title>
 
-    {# ICONS #}
-    <link rel='shortcut icon' href='{% static "images/favicon.ico" %}'>
-    <link rel='apple-touch-icon' href='{% static "images/apple-touch-icon-precomposed.png" %}'>
-    <link rel='apple-touch-icon-precomposed' href='{% static "images/apple-touch-icon-precomposed.png" %}'>
+  {# ICONS #}
+  <link rel='shortcut icon' href='{% static "images/favicon.ico" %}'>
+  <link rel='apple-touch-icon' href='{% static "images/apple-touch-icon-precomposed.png" %}'>
+  <link rel='apple-touch-icon-precomposed' href='{% static "images/apple-touch-icon-precomposed.png" %}'>
 
-    {# WINDOWS 8 TILE ICON #}
-    <meta name='application-name' content='PrimarySite Customer Feedback'>
-    <meta name='msapplication-TileColor' content='#00aaef'>
-    <meta name='msapplication-TileImage' content='{% static "metro-icon.png" %}'>
+  {# WINDOWS 8 TILE ICON #}
+  <meta name='application-name' content='PrimarySite Customer Feedback'>
+  <meta name='msapplication-TileColor' content='#00aaef'>
+  <meta name='msapplication-TileImage' content='{% static "metro-icon.png" %}'>
 
-    {# STYLESHEETS #}
-    <link rel='stylesheet' type='text/css' href='{% static "css/normalize.css" %}'>
-    <link rel='stylesheet' type='text/css' href='{% static "css/style.css" %}'>
+  {# STYLESHEETS #}
+  <link rel='stylesheet' type='text/css' href='{% static "css/normalize.css" %}'>
+  <link rel='stylesheet' type='text/css' href='{% static "css/style.css" %}'>
 
-    {% block styles %}{% endblock styles %}
+  {% block styles %}{% endblock styles %}
 
-    {# FONTS #}
-    <link rel="stylesheet" href="https://use.typekit.net/sfg6kev.css">
+  {# FONTS #}
+  <link rel="stylesheet" href="https://use.typekit.net/sfg6kev.css">
 
 </head>
+
 <body>
-    <header>
-      <a href="/">
-          <svg>
-              <use xlink:href="{% static 'images/ps-logo.svg' %}#icon-logo-colour"></use>
-          </svg>
+  <header>
+    <a class="brand" href="/">
+      <svg>
+        <use xlink:href="{% static 'images/ps-logo.svg' %}#icon-logo-colour"></use>
+      </svg>
+    </a>
+
+    <span class="ps-phone">
+      <p>Call Us Today</p>
+      <a href="tel:01636616640">01636 616 640
       </a>
-        {% block header %}{% endblock header %}
-    </header>
+    </span>
+    {% block header %}{% endblock header %}
+  </header>
 
-    <nav>
-        {% block nav %}{% endblock nav %}
-    </nav>
+  <nav>
+    {% block nav %}{% endblock nav %}
+  </nav>
 
-    <section class="content">
-        {% block content %}{% endblock content %}
-    </section>
+  <section class="content">
+    {% block content %}{% endblock content %}
+  </section>
 
-    <footer>
-        <p class="icon-primarysite">Primarysite&copy;</p>
-        {% block footer %}{% endblock footer %}
-    </footer>
+  <footer>
+    <p class="icon-primarysite">Primarysite&copy;</p>
+    {% block footer %}{% endblock footer %}
+  </footer>
 
-    <script type='text/javascript' src='{% static "js/jquery-3.3.1.min.js" %}'></script>
-    <script type='text/javascript' src='{% static "js/feedback.js" %}'></script>
-    {% block scripts %}{% endblock scripts %}
+  <script type='text/javascript' src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+  <script type='text/javascript' src='{% static "js/feedback.js" %}'></script>
+  {% block scripts %}{% endblock scripts %}
 </body>
+
 </html>

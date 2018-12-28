@@ -22,6 +22,29 @@ body {
   color: #004669;
 }
 
+/* main-header */
+header {
+  background: #003366;
+}
+
+
+/* MEH-potatos
+============== */
+#switchview {
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  background: #469AE2;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+}
+
+#switchview:focus, #switchview:hover {
+  cursor: pointer;
+}
+
+
 [class*='icon-']:before {
   display: inline-block;
   font-family: 'Glyphter';
@@ -37,6 +60,7 @@ body {
 .icon-satifactory:before{content:'\0042';}
 .icon-excelent:before{content:'\0043';}
 */
+
 .icon-primarysite:before {
   content: '\0044';
   color: #ed7983;
@@ -47,20 +71,6 @@ body {
   content: '\0045';
   color: #ed7983;
   font-size: 1.6rem;
-}
-
-#switchview {
-  display: inline-block;
-  padding: 5px;
-  margin: 5px;
-  background: #469AE2;
-  border-radius: 5px;
-  color: #fff;
-  text-decoration: none;
-}
-
-#switchview:focus, #switchview:hover {
-  cursor: pointer;
 }
 
 /* GEOFF MODE
