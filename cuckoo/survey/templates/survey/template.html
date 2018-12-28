@@ -56,12 +56,18 @@
   </section>
 
   <footer>
-    <p class="icon-primarysite">Primarysite&copy;</p>
+    <ul class="footer-center">
+      <span class="ps-footer"><img src="3" alt="PrimarySite logo" /></span>
+      <li>&copy;<span id="year"></span> PrimarySite Limited. All rights reserved. Company Reg no: 5533790 VAT Reg Number: 274360794</li>
+      <li>ISO9001 - Internationally recognised Quality Management System.</li>
+      <li>BESA - Trade association for the UK’s world-leading educational suppliers</li>
+    </ul>
     {% block footer %}{% endblock footer %}
   </footer>
 
   <script type='text/javascript' src='{% static "js/jquery-3.3.1.min.js" %}'></script>
   <script type='text/javascript' src='{% static "js/feedback.js" %}'></script>
+  <script type='text/javascript' src='{% static "js/date-time.js" %}'></script>
   {% block scripts %}{% endblock scripts %}
 </body>
 
