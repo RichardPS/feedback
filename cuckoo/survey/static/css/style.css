@@ -24,7 +24,45 @@ body {
 
 /* main-header */
 header {
-  background: #003366;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    background: #003366;
+    color: #fff;
+    height: 60px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 101;
+}
+
+header .brand {
+    display: flex;
+    width: 170px;
+    height: 100%;
+    align-items: center;
+}
+
+.ps-phone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: .3rem;
+}
+
+.ps-phone p {
+  font-size: 1rem;
+}
+
+.ps-phone a {
+  font-size: 1.55rem;
+  color: #ffce4f;
 }
 
 
