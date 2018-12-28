@@ -14,6 +14,7 @@
 html {
   font-size: 62.5%;
   background-color: #fff;
+  line-height: 1.6;
 }
 
 body {
@@ -67,6 +68,58 @@ header .brand svg {
 .ps-phone a {
   font-size: 1.55rem;
   color: #ffce4f;
+}
+
+/* Footer */
+footer {
+  background-color: #003366;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  font-size: 1.3rem;
+}
+
+footer ul li {
+  list-style-type: none;
+}
+
+footer p {
+  color: #fff;
+  padding-top: 20px;
+}
+
+footer a {
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+footer a:focus,
+footer a:hover {
+  text-decoration: underline;
+}
+
+.ps-footer svg {
+  fill: currentColor;
+  width: 280px;
+  height: 80px;
+}
+
+.social-links ul {
+  display: flex;
+  width: 250px;
+  margin: 40px auto 20px;
+  justify-content: center;
+}
+
+.social-links a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 0 8px;
+}
+
+.social-links a svg {
+  fill: #fff;
 }
 
 /* MEH-potatos
